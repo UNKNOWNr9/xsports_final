@@ -8,6 +8,8 @@ class CustomUser(AbstractUser):
     phone_number = models.CharField(
         max_length=11,
         unique=True,
+        null=True,
+        blank=True,
         validators=[
             RegexValidator(
                 regex=r'^09\d{9}$',

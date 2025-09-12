@@ -1,1 +1,2 @@
 opt sms panel for registration
+email service fail log
