@@ -9,97 +9,36 @@
                 <div class="row g-4">
                     <div class="col-12 col-lg-8">
                         <div class="gt-news-standard-items">
-                            <div class="gt-news-card-items-5">
-                                <div class="gt-news-image">
-                                    <img src="{% static 'shared/img/inner-page/news-details/details-1.jpg' %}" alt="img">
-                                </div>
-                                <div class="gt-news-content">
-                                    <ul class="gt-date-list">
-                                        <li>
-                                            <i class="fa-solid fa-calendar-days"></i>
-                                            یازده ازدیبهشت 1403
-                                        </li>
-                                        <li>
-                                            <i class="fa-solid fa-comments"></i>
-                                            19 نظر
-                                        </li>
-                                    </ul>
-                                    <h3>
-                                        <a href="#">
-                                            سی پنل چیست؟ راهنمای کامل تسلط بر کنترل پنل. لورم <br>ایپسوم متن ساختگی با
-                                            تولید
+                            {% for article in articles %}
+                                <div class="gt-news-card-items-5">
+                                    <div class="gt-news-image">
+                                        <img src="{{ article.image.url }}" alt="img">
+                                    </div>
+                                    <div class="gt-news-content">
+                                        <ul class="gt-date-list">
+                                            <li>
+                                                <i class="fa-solid fa-calendar-days"></i>
+                                                {{ article.created_at }}
+                                            </li>
+                                            <li>
+                                                <i class="fa-solid fa-comments"></i>
+                                                19 نظر ????
+                                            </li>
+                                        </ul>
+                                        <h3>
+                                            <a href="#">
+                                                {{ article.title }}
+                                            </a>
+                                        </h3>
+                                        <p>
+                                            {{ article.body | truncatewords:20 }}
+                                        </p>
+                                        <a href="#" class="gt-theme-btn">
+                                            بیشتر بخوانید
                                         </a>
-                                    </h3>
-                                    <p>
-                                        در ماه‌های گذشته، پال‌ورد به سرعت پیروانی جمع‌آوری کرد و قبل از اینکه به یکی از
-                                        موفق‌ترین بازی‌های مستقل ویدئویی تمام دوران تبدیل شود.لورم ایپسوم متن ساختگی با
-                                        تولید سادگی نامفهوم
-                                    </p>
-                                    <a href="#" class="gt-theme-btn">
-                                        بیشتر بخوانید
-                                    </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="gt-news-card-items-5">
-                                <div class="gt-news-image">
-                                    <img src="{% static 'shared/img/inner-page/news-details/details-2.jpg' %}" alt="img">
-                                </div>
-                                <div class="gt-news-content">
-                                    <ul class="gt-date-list">
-                                        <li>
-                                            <i class="fa-solid fa-calendar-days"></i>
-                                            یازده ازدیبهشت 1403
-                                        </li>
-                                        <li>
-                                            <i class="fa-solid fa-comments"></i>
-                                            19 نظر
-                                        </li>
-                                    </ul>
-                                    <h3>
-                                        <a href="#">
-                                            استراتژی‌هایی برای تسلط بر بازی مورد علاقه‌تان
-                                        </a>
-                                    </h3>
-                                    <p>
-                                        در ماه‌های گذشته، پال‌ورد به سرعت پیروانی جمع‌آوری کرد و قبل از اینکه به یکی از
-                                        موفق‌ترین بازی‌های مستقل ویدئویی تمام دوران تبدیل شود.لورم ایپسوم متن ساختگی با
-                                        تولید سادگی نامفهوم از صنعت چاپ
-                                    </p>
-                                    <a href="#" class="gt-theme-btn">
-                                        بیشتر بخوانید
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="gt-news-card-items-5 mb-0">
-                                <div class="gt-news-image">
-                                    <img src="{% static 'shared/img/inner-page/news-details/details-3.jpg' %}" alt="img">
-                                </div>
-                                <div class="gt-news-content">
-                                    <ul class="gt-date-list">
-                                        <li>
-                                            <i class="fa-solid fa-calendar-days"></i>
-                                            یازده ازدیبهشت 1403
-                                        </li>
-                                        <li>
-                                            <i class="fa-solid fa-comments"></i>
-                                            19 نظر
-                                        </li>
-                                    </ul>
-                                    <h3>
-                                        <a href="#">
-                                            شخصیت‌های تأثیرگذار در تاریخ بازی‌ها
-                                        </a>
-                                    </h3>
-                                    <p>
-                                        در ماه‌های گذشته، پال‌ورد به سرعت پیروانی جمع‌آوری کرد و قبل از اینکه به یکی از
-                                        موفق‌ترین بازی‌های مستقل ویدئویی تمام دوران تبدیل شود.لورم ایپسوم متن ساختگی با
-                                        تولید سادگی نامفهوم از صنعت چاپ
-                                    </p>
-                                    <a href="#" class="gt-theme-btn">
-                                        بیشتر بخوانید
-                                    </a>
-                                </div>
-                            </div>
+                            {% endfor %}
                             <div class="gt-page-nav-wrap pt-5 text-start">
                                 <ul class="justify-content-start">
                                     <li><a class="gt-page-numbers" href="#"><i
@@ -114,6 +53,8 @@
                             </div>
                         </div>
                     </div>
+
+                    {# category #}
                     <div class="col-lg-4 col-12">
                         <div class="gt-main-sideber sticky-style">
                             <div class="gt-single-sideber-widget">
@@ -135,7 +76,8 @@
                                 <div class="gt-recent-post-area">
                                     <div class="gt-recent-items">
                                         <div class="gt-recent-thumb">
-                                            <img src="{% static 'shared/img/inner-page/news-details/post-1.jpg' %}" alt="img">
+                                            <img src="{% static 'shared/img/inner-page/news-details/post-1.jpg' %}"
+                                                 alt="img">
                                         </div>
                                         <div class="gt-recent-content">
                                             <h6>
@@ -152,7 +94,8 @@
                                     </div>
                                     <div class="gt-recent-items">
                                         <div class="gt-recent-thumb">
-                                            <img src="{% static 'shared/img/inner-page/news-details/post-2.jpg' %}" alt="img">
+                                            <img src="{% static 'shared/img/inner-page/news-details/post-2.jpg' %}"
+                                                 alt="img">
                                         </div>
                                         <div class="gt-recent-content">
                                             <h6>
@@ -170,7 +113,8 @@
                                     </div>
                                     <div class="gt-recent-items">
                                         <div class="gt-recent-thumb">
-                                            <img src="{% static 'shared/img/inner-page/news-details/post-3.jpg' %}" alt="img">
+                                            <img src="{% static 'shared/img/inner-page/news-details/post-3.jpg' %}"
+                                                 alt="img">
                                         </div>
                                         <div class="gt-recent-content">
                                             <h6>

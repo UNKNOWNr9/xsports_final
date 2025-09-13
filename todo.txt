@@ -1,2 +1,4 @@
 opt sms panel for registration
 email service fail log
+hide the important settings in setting.py to .env gitignore
+add persian datetime to templates with templatetags or packages
