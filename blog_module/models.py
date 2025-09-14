@@ -1,6 +1,6 @@
 from django.db import models
 from .managers import ArticleManager
-
+from django.urls import reverse
 from account_module.models import CustomUser
 
 
@@ -40,6 +40,7 @@ class Article(models.Model):
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
         ordering = ['-created_at']
+
     def __str__(self):
         return self.title
 

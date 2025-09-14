@@ -21,6 +21,15 @@
                                                 {{ article.created_at }}
                                             </li>
                                             <li>
+                                                <i class="fa fa-user"></i>
+                                                نویسنده :
+                                                {% if article.author.get_full_name %}
+                                                    {{ article.author.get_full_name }}
+                                                {% else %}
+                                                    {{ article.author }}
+                                                {% endif %}
+                                            </li>
+                                            <li>
                                                 <i class="fa-solid fa-comments"></i>
                                                 19 نظر ????
                                             </li>
@@ -31,7 +40,7 @@
                                             </a>
                                         </h3>
                                         <p>
-                                            {{ article.body | truncatewords:20 }}
+                                            {{ article.body | truncatewords:75 }}
                                         </p>
                                         <a href="#" class="gt-theme-btn">
                                             بیشتر بخوانید
@@ -39,18 +48,28 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                            <div class="gt-page-nav-wrap pt-5 text-start">
-                                <ul class="justify-content-start">
-                                    <li><a class="gt-page-numbers" href="#"><i
-                                            class="fa-solid fa-chevron-right"></i></a></li>
-                                    <li><a class="gt-page-numbers" href="#">01</a></li>
-                                    <li><a class="gt-page-numbers active" href="#">02</a></li>
-                                    <li><a class="gt-page-numbers" href="#">03</a></li>
-                                    <li><a class="gt-page-numbers" href="#">04</a></li>
-                                    <li><a class="gt-page-numbers" href="#"><i class="fa-solid fa-chevron-left"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
+                            {% if is_paginated %}
+                                <div class="gt-page-nav-wrap pt-5 text-start">
+                                    <ul class="justify-content-start">
+                                        {% if page_obj.has_previous %}
+                                            <li><a class="gt-page-numbers"
+                                                   href="?page={{ page_obj.previous_page_number }}"><i
+                                                    class="fa-solid fa-chevron-right"></i></a></li>
+                                        {% endif %}
+                                        {% for page_number in paginator.page_range %}
+                                            <li>
+                                                <a class="gt-page-numbers {% if page_obj.number == page_number %}active{% endif %}"
+                                                   href="?page={{ page_number }}">{{ page_number }}</a></li>
+                                        {% endfor %}
+                                        {% if page_obj.has_next %}
+                                            <li>
+                                            <a class="gt-page-numbers" href="?page={{ page_obj.next_page_number }}"><i
+                                                    class="fa-solid fa-chevron-left"></i></a>
+                                        {% endif %}
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -197,5 +216,4 @@
             </div>
         </div>
     </section>
-
 {% endblock %}

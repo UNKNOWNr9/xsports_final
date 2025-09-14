@@ -1,4 +1,14 @@
+# TODO:
 opt sms panel for registration
 email service fail log
 hide the important settings in setting.py to .env gitignore
 add persian datetime to templates with templatetags or packages
+authors posts show in template
+
+
+-------------------------------------------------------------------------------------
+# knowledge:
+model managers
+get_absolute_url
+slug converter save() method
+image cropping with sorl_thumbnail

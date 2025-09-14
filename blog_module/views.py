@@ -1,5 +1,6 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from .models import Article
+from django.shortcuts import render, get_object_or_404
 
 
 class ArticleListView(ListView):
