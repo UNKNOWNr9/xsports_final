@@ -1,4 +1,6 @@
 from django.db import models
+from .managers import ArticleManager
+
 from account_module.models import CustomUser
 
 
@@ -31,12 +33,13 @@ class Article(models.Model):
     status = models.CharField(max_length=25, choices=STATUS.choices, default=STATUS.DRAFT, verbose_name='وضعیت')
     rejected_reason = models.TextField(blank=True, null=True, verbose_name='علت رد شدن')
     slug = models.SlugField(max_length=50, unique=True, blank=True, editable=False, verbose_name='آدرس')
-    category = models.ForeignKey(ArticleCategory, on_delete=models.CASCADE, verbose_name='دسته بندی مقاله')
+    category = models.ManyToManyField(ArticleCategory, verbose_name='دسته بندی')
+    objects = ArticleManager()
 
     class Meta:
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
-
+        ordering = ['-created_at']
     def __str__(self):
         return self.title
 

@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'blog_module.apps.BlogModuleConfig',
     'contact_module.apps.ContactModuleConfig',
     # external apps
+    'django_render_partial',
 ]
 
 MIDDLEWARE = [
