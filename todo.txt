@@ -12,3 +12,8 @@ model managers
 get_absolute_url
 slug converter save() method
 image cropping with sorl_thumbnail
+
+-------------------------------------------------------------------------------------
+# template sample
+https://ex-coders.com/
+-------------------------------------------------------------------------------------

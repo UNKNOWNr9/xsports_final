@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'contact_module.apps.ContactModuleConfig',
     # external apps
     'django_render_partial',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [

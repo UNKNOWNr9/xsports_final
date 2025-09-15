@@ -1,6 +1,6 @@
 {% extends 'shared/base.html' %}
 {% load static %}
-{% block title %} ???????????????????? {% endblock %}
+{% block title %} {{ article.title }} {% endblock %}
 {% block content %}
     <!-- GT News-details Section Start -->
     <section class="news-details-section section-padding">
@@ -12,94 +12,15 @@
                             <img src="{{ article.image.url }}" alt="img">
                         </div>
                         <div class="gt-news-details-content">
-                            <h3>بشثبشثبشثب</h3>
+                            <h3>{{ article.title }}</h3>
                             <p>
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                                است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط
-                                فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای
-                                زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه
-                            </p>
-                            <h3 class="text">هاستینگ گیمینگ چیست؟</h3>
-                            <p>
-                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپلورم ایپسوم متن ساختگی با تولید
-                                سادگی نامفهوم از صنعت چاپلورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپلورم
-                                ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ لورم ایپسوم
-                            </p>
-                            <ul class="gt-list">
-                                <li>
-                                    <i class="fa-solid fa-check"></i>
-                                    لورم ایپسوم متن ساختگی با تولید سادگی
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-check"></i>
-                                    لورم ایپسوم متن ساختگی با تولید سادگی
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-check"></i>
-                                    لورم ایپسوم متن ساختگی با تولید سادگی
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-check"></i>
-                                    لورم ایپسوم متن ساختگی با تولید سادگی
-                                </li>
-                            </ul>
-                            <div class="gt-sideber">
-                                <h6>
-                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                                    گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و
-                                    برای شرایط فعلی تکنولوژی
-                                </h6>
-                                <div class="client-info-item">
-                                    <div class="client-info">
-                                        <div class="image">
-                                            <img src="assets/img/inner-page/news-details/client-1.png" alt="img">
-                                        </div>
-                                        <h4>مایکل کلارک</h4>
-                                    </div>
-                                    <div class="icon">
-                                        <img src="assets/img/home-1/icon/quate.svg" alt="img">
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="mb-5">
-                                در نهایت، موسیقی و افکت‌های صوتی جنبه‌ای حیاتی از طراحی بازی هستند که می‌توانند تجربه
-                                بازیکن را تحت تأثیر قرار دهند. با انتخاب و ایجاد دقیق صداهای مناسب، طراحان می‌توانند
-                                بازی‌های غوطه‌ور و جذابی بسازند که برای بازیکنان جالب باشد.لورم ایپسوم متن ساختگی با
-                                تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان
-                            </p>
-                            <h3>
-                                موسیقی و جلوه‌های صوتی:
-                            </h3>
-                            <p>
-                                برای ایجاد موسیقی و جلوه‌های صوتی مؤثر، یک طراح بازی نیاز به در نظر گرفتن چند عامل کلیدی
-                                دارد. به عنوان مثال، لحن بازی و احساسات مورد نظر.لورم ایپسوم متن ساختگی با تولید سادگی
-                                نامفهوم از صنعت چاپ و با استفاده از طراحان
-                            </p>
-                            <div class="row g-4 mt-4 mb-4">
-                                <div class="col-lg-6">
-                                    <div class="gt-details-image">
-                                        <img src="assets/img/inner-page/news-details/details-5.jpg" alt="img">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="gt-details-image">
-                                        <img src="assets/img/inner-page/news-details/details-6.jpg" alt="img">
-                                    </div>
-                                </div>
-                            </div>
-                            <p>
-                                ظهور بازی‌های موبایلی به‌طور قابل‌توجهی به گسترش مخاطبان بازی کمک کرده و به یک قشر
-                                وسیع‌تری رسیده است. همچنین بر روند طراحی بازی تأثیر گذاشته است و بسیاری از توسعه‌دهندگان
-                                بازی‌های اختصاصی برای پلتفرم‌های موبایل ساخته‌اند.لورم ایپسوم متن ساختگی با تولید سادگی
-                                نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                                {{ article.body | linebreaks }}
                             </p>
                             <div class="row gt-tag-share-wrap mt-4 mb-5">
                                 <div class="col-lg-8 col-12">
                                     <div class="tagcloud">
                                         <span>تگ ها:</span>
-                                        <a href="news-details.html">ورزش‌های الکترونیکی</a>
-                                        <a href="news-details.html">بازاریابی</a>
-                                        <a href="news-details.html">طراحی</a>
+                                        <a href="#">{% for cat in article.category.all %}{{ cat.title }}{% endfor %}</a>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-12 mt-3 mt-lg-0 text-lg-end">
@@ -149,19 +70,19 @@
                                 </div>
                                 <div class="gt-blog-single-comment d-flex gap-4 pt-4 pb-4">
                                     <div class="image">
-                                        <img src="assets/img/inner-page/news-details/comment-1.jpg" alt="img">
+                                        <img src="{% static 'shared/img/inner-page/news-details/comment-1.jpg' %}" alt="img">
                                     </div>
                                     <div class="gt-content">
                                         <div class="head d-flex flex-wrap gap-2 align-items-center justify-content-between">
                                             <div class="con">
                                                 <h5>
-                                                    <a href="news-details.html">
+                                                    <a href="#">
                                                         آدام جان
                                                     </a>
                                                 </h5>
                                                 <span>پنج اردیبهشت 1404 ساعت 2:33</span>
                                             </div>
-                                            <a href="news-details.html" class="reply">پاسخ دادن</a>
+                                            <a href="#" class="reply">پاسخ دادن</a>
                                         </div>
                                         <p class="mt-2 mb-4">
                                             سلامت و رفاه شما اولویت‌های اصلی ما هستند. ما وقت می‌گذاریم تا به نگرانی‌های
@@ -171,15 +92,15 @@
                                 </div>
                                 <div class="gt-blog-single-comment d-flex gap-4 pt-4 pb-4">
                                     <div class="image">
-                                        <img src="assets/img/inner-page/news-details/comment-2.jpg" alt="img">
+                                        <img src="{% static 'shared/img/inner-page/news-details/comment-2.jpg' %}" alt="img">
                                     </div>
                                     <div class="gt-content">
                                         <div class="head d-flex flex-wrap gap-2 align-items-center justify-content-between">
                                             <div class="con">
-                                                <h5><a href="news-details.html">کریستین واتسونز</a></h5>
+                                                <h5><a href="#">کریستین واتسونز</a></h5>
                                                 <span>پنج اردیبهشت 1404 ساعت 2:33</span>
                                             </div>
-                                            <a href="news-details.html" class="reply">پاسخ دادن</a>
+                                            <a href="#" class="reply">پاسخ دادن</a>
                                         </div>
                                         <p class="mt-2 mb-4">
                                             سلامت و رفاه شما اولویت‌های اصلی ما هستند. ما وقت می‌گذاریم تا به نگرانی‌های
@@ -190,156 +111,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-12">
-                        <div class="gt-main-sideber sticky-style">
-                            <div class="gt-single-sideber-widget">
-                                <div class="gt-widget-title">
-                                    <h3>اینجا جستجو کنید</h3>
-                                </div>
-                                <div class="gt-search-widget">
-                                    <form action="#">
-                                        <input type="text" placeholder="اینجا جستجو کنید">
-                                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="gt-single-sideber-widget">
-                                <div class="gt-widget-title">
-                                    <h3>دسته بندی ها</h3>
-                                </div>
-                                <ul>
-                                    <li><a href="news-details.html">بازی لایو</a><span>(01)</span></li>
-                                    <li><a href="news-details.html">فانتزی</a><span>(02)</span></li>
-                                    <li><a href="news-details.html">گیمینگ</a><span>(03)</span></li>
-                                    <li><a href="news-details.html">ایکس باکس</a><span>(04)</span></li>
-                                    <li><a href="news-details.html">شلیک</a><span>(05)</span></li>
-                                </ul>
-                            </div>
-                            <div class="gt-single-sideber-widget">
-                                <div class="gt-widget-title">
-                                    <h3>پست اخیر</h3>
-                                </div>
-                                <div class="gt-recent-post-area">
-                                    <div class="gt-recent-items">
-                                        <div class="gt-recent-thumb">
-                                            <img src="assets/img/inner-page/news-details/post-1.jpg" alt="img">
-                                        </div>
-                                        <div class="gt-recent-content">
-                                            <h6>
-                                                <a href="news-details.html">
-                                                    یک روز در زندگی یک رویداد ورزش‌های الکترونیکی
-                                                </a>
-                                            </h6>
-                                            <ul>
-                                                <li>
-                                                    شش اسفند 1404
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="gt-recent-items">
-                                        <div class="gt-recent-thumb">
-                                            <img src="assets/img/inner-page/news-details/post-2.jpg" alt="img">
-                                        </div>
-                                        <div class="gt-recent-content">
-                                            <h6>
-                                                <a href="news-details.html">
-                                                    شخصیت های تأثیرگذار در تاریخ<br>
-                                                    لورم اپسیوم
-                                                </a>
-                                            </h6>
-                                            <ul>
-                                                <li>
-                                                    شش اسفند 1404
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="gt-recent-items">
-                                        <div class="gt-recent-thumb">
-                                            <img src="assets/img/inner-page/news-details/post-3.jpg" alt="img">
-                                        </div>
-                                        <div class="gt-recent-content">
-                                            <h6>
-                                                <a href="news-details.html">
-                                                    پشت صحنه‌های مورد علاقه شما<br>
-                                                    لورم اپسیوم
-                                                </a>
-                                            </h6>
-                                            <ul>
-                                                <li>
-                                                    شش اسفند 1404
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="gt-contact-bg bg-cover"
-                                 style="background-image: url(assets/img/inner-page/match-details/bg.jpg);">
-                                <div class="gt-contact-content">
-                                    <h3>نیاز به کمک دارید؟</h3>
-                                    <p>نیاز به کمک دارید؟ با ما تماس بگیرید – پشتیبانی کامل </p>
-                                    <div class="gt-contact-item">
-                                        <div class="gt-icon">
-                                            <i class="fa-solid fa-phone"></i>
-                                        </div>
-                                        <ul class="gt-list">
-                                            <li><span>تماس با ما:</span></li>
-                                            <li><a href="tel:+0094382229540">09120000000</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="gt-contact-item">
-                                        <div class="gt-icon">
-                                            <i class="fa-regular fa-envelope"></i>
-                                        </div>
-                                        <ul class="gt-list">
-                                            <li><span>ایمیل ما</span></li>
-                                            <li><a href="infor%40xridergamil.html">
-                                                infor@xridergamil.com
-                                            </a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="gt-contact-item mb-0">
-                                        <div class="gt-icon">
-                                            <i class="fa-solid fa-location-dot"></i>
-                                        </div>
-                                        <ul class="gt-list">
-                                            <li><span>لوکیشن:</span></li>
-                                            <li>ایران استان البرز</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% include 'shared/includes/sidebar.html' %}
                 </div>
             </div>
         </div>
     </section>
-
     <!-- GT Newsletter Section Start -->
-    <section class="gt-newsletter-section fix mb-4">
-        <div class="container">
-            <div class="gt-newsletter-wrapper bg-cover rtl"
-                 style="background-image: url(assets/img/home-1/cta/newsletter-bg.jpg);">
-                <div class="shape">
-                    <img src="assets/img/home-1/cta/drive.png" alt="img">
-                </div>
-                <h4 class="wow fadeInLeft" data-wow-delay=".3s">
-                    امروز ثبت‌نام کنید تا جدیدترین ااخبار<br>
-                    و دیدگاه ها را دریافت کنید
-                </h4>
-                <form action="#" class="wow fadeInRight" data-wow-delay=".5s">
-                    <div class="form-clt">
-                        <input type="text" name="email" id="email" placeholder="آدرس ایمیل شما">
-                        <button type="submit" class="gt-theme-btn">
-                            همین حالا مشترک شوید
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
+    {% include 'shared/includes/advertising_banner.html' %}
 {% endblock %}

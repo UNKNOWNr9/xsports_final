@@ -26,14 +26,14 @@ class Article(models.Model):
 
     title = models.CharField(max_length=50, verbose_name='عنوان')
     body = models.TextField(verbose_name='متن مقاله')
-    image = models.ImageField(upload_to='article', verbose_name='تصویر')  ###
+    image = models.ImageField(upload_to='article', verbose_name='تصویر')
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='نویسنده')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ اپدیت')
     status = models.CharField(max_length=25, choices=STATUS.choices, default=STATUS.DRAFT, verbose_name='وضعیت')
     rejected_reason = models.TextField(blank=True, null=True, verbose_name='علت رد شدن')
     slug = models.SlugField(max_length=50, unique=True, blank=True, editable=False, verbose_name='آدرس')
-    category = models.ManyToManyField(ArticleCategory, verbose_name='دسته بندی')
+    category = models.ManyToManyField(ArticleCategory, verbose_name='دسته بندی', related_name='articles')
     objects = ArticleManager()
 
     class Meta:
