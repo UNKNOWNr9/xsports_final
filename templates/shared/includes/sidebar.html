@@ -6,7 +6,9 @@
                 <h3>دسته بندی ها</h3>
             </div>
             <ul>
-                <li><a href="#">{{ category.title }}</a><span>(01)</span></li>
+                {% for cat in categories %}
+                	<li><a href="#">{{ cat.title }}</a><span>(01)</span></li>
+                {% endfor %}
             </ul>
         </div>
         <div class="gt-single-sideber-widget">
