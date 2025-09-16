@@ -27,11 +27,13 @@
                                             <li>
                                                 <i class="fa fa-user"></i>
                                                 نویسنده :
-                                                {% if article.author.get_full_name %}
-                                                    {{ article.author.get_full_name }}
-                                                {% else %}
-                                                    {{ article.author }}
-                                                {% endif %}
+                                                <a href="#">
+                                                    {% if article.author.get_full_name %}
+                                                        {{ article.author.get_full_name }}
+                                                    {% else %}
+                                                        {{ article.author }}
+                                                    {% endif %}
+                                                </a>
                                             </li>
                                             <li>
                                                 <i class="fa-solid fa-comments"></i>
@@ -83,26 +85,5 @@
         </div>
     </section>
     <!-- GT Newsletter Section Start -->
-    <section class="gt-newsletter-section fix mb-4">
-        <div class="container">
-            <div class="gt-newsletter-wrapper bg-cover rtl"
-                 style="background-image: url({% static 'shared/img/home-1/cta/newsletter-bg.jpg' %});">
-                <div class="shape">
-                    <img src="{% static 'shared/img/home-1/cta/drive.png' %}" alt="img">
-                </div>
-                <h4 class="wow fadeInLeft" data-wow-delay=".3s">
-                    امروز ثبت‌نام کنید تا جدیدترین اخبار<br>
-                    و دیدگاه ها را دریافت کنید
-                </h4>
-                <form action="#" class="wow fadeInRight" data-wow-delay=".5s">
-                    <div class="form-clt">
-                        <input type="text" name="email" id="email" placeholder="آدرس ایمیل شما">
-                        <button type="submit" class="gt-theme-btn">
-                            همین حالا مشترک شوید
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
+{% include 'shared/includes/advertising_banner.html' %}
 {% endblock %}

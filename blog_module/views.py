@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
-from .models import CustomUser
-
 from .models import Article, ArticleCategory
+from django.db.models import Count
 
 
 class ArticleListView(ListView):
@@ -19,7 +18,7 @@ class ArticleDetail(DetailView):
 
 
 def article_sidebar(request):
-    categories = ArticleCategory.objects.filter(is_active=True)
+    categories = ArticleCategory.objects.filter(is_active=True).annotate(count=Count('articles'))
     context = {
         'categories': categories
     }

@@ -4,6 +4,7 @@ email service fail log
 hide the important settings in setting.py to .env gitignore
 add persian datetime to templates with templatetags or packages
 authors posts show in template
+rewrite article_by_category & article_by_author with CBV or FBV with pagination
 
 
 -------------------------------------------------------------------------------------

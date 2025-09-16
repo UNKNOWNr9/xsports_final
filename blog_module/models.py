@@ -28,7 +28,7 @@ class Article(models.Model):
     title = models.CharField(max_length=50, verbose_name='عنوان')
     body = models.TextField(verbose_name='متن مقاله')
     image = models.ImageField(upload_to='article', verbose_name='تصویر')
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='نویسنده', related_name='authors')
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='نویسنده', related_name='author_articles')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ اپدیت')
     status = models.CharField(max_length=25, choices=STATUS.choices, default=STATUS.DRAFT, verbose_name='وضعیت')
