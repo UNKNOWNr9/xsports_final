@@ -1,5 +1,5 @@
 from django.db import models
-from .managers import ArticleManager
+from .managers import ArticleManager, ArticleCategoryManager
 from django.urls import reverse
 from account_module.models import CustomUser
 
@@ -8,6 +8,7 @@ class ArticleCategory(models.Model):
     title = models.CharField(max_length=25, unique=True, verbose_name='عنوان')
     is_active = models.BooleanField(verbose_name='فعال / غیرفعال')
     slug = models.SlugField(max_length=25, unique=True, verbose_name='آدرس')
+    objects = ArticleCategoryManager()
 
     class Meta:
         verbose_name = 'دسته بندی'
@@ -27,7 +28,7 @@ class Article(models.Model):
     title = models.CharField(max_length=50, verbose_name='عنوان')
     body = models.TextField(verbose_name='متن مقاله')
     image = models.ImageField(upload_to='article', verbose_name='تصویر')
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='نویسنده')
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='نویسنده', related_name='authors')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ اپدیت')
     status = models.CharField(max_length=25, choices=STATUS.choices, default=STATUS.DRAFT, verbose_name='وضعیت')

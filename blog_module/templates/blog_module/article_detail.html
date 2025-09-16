@@ -1,5 +1,6 @@
 {% extends 'shared/base.html' %}
 {% load static %}
+{% load render_partial %}
 {% block title %} {{ article.title }} {% endblock %}
 {% block content %}
     <!-- GT News-details Section Start -->
@@ -111,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    {% include 'shared/includes/sidebar.html' %}
+                    {% render_partial 'blog_module.views.article_sidebar' %}
                 </div>
             </div>
         </div>
