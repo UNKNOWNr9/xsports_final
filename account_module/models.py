@@ -18,3 +18,4 @@ class CustomUser(AbstractUser):
         verbose_name='شماره تلفن'
     )
     is_author = models.BooleanField(default=False, verbose_name='نویسنده')
+    image = models.ImageField(upload_to='user_avatar', blank=True, null=True, verbose_name='آواتار')

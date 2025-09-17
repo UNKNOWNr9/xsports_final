@@ -10,50 +10,61 @@
             <div class="gt-news-standard-wrapper">
                 <div class="row g-4">
                     <div class="col-12 col-lg-8">
+                        <div class="alert alert-dark">
+                            {% if author.get_full_name %}
+                                نویسنده : ({{ author.get_full_name }})
+                            {% else %}
+                                نویسنده : ({{ author.username }})
+                            {% endif %}
+                        </div>
                         <div class="gt-news-standard-items">
-                            {% for article in articles %}
-                                <div class="gt-news-card-items-5">
-                                    {% thumbnail article.image "856x402" crop="center" as im %}
-                                        <div class="gt-news-image">
-                                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                                        </div>
-                                    {% endthumbnail %}
-                                    <div class="gt-news-content">
-                                        <ul class="gt-date-list">
-                                            <li>
-                                                <i class="fa fa-user"></i>
-                                                نویسنده :
-                                                <a href="{% url 'article_by_author' username=article.author.username %}">
+                            {% if articles %}
+                                {% for article in articles %}
+                                    <div class="gt-news-card-items-5">
+                                        {% thumbnail article.image "856x402" crop="center" as im %}
+                                            <div class="gt-news-image">
+                                                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                            </div>
+                                        {% endthumbnail %}
+                                        <div class="gt-news-content">
+                                            <ul class="gt-date-list">
+                                                <li>
+                                                    <i class="fa fa-user"></i>
+                                                    نویسنده :
                                                     {% if article.author.get_full_name %}
                                                         {{ article.author.get_full_name }}
                                                     {% else %}
                                                         {{ article.author }}
                                                     {% endif %}
+                                                </li>
+                                                <li>
+                                                    <i class="fa-solid fa-calendar-days"></i>
+                                                    {{ article.created_at }}
+                                                </li>
+                                                <li>
+                                                    <i class="fa-solid fa-comments"></i>
+                                                    19 نظر ????
+                                                </li>
+                                            </ul>
+                                            <h3>
+                                                <a href="{% url 'article_detail' slug=article.slug %}">
+                                                    {{ article.title }}
                                                 </a>
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-calendar-days"></i>
-                                                {{ article.created_at }}
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-comments"></i>
-                                                19 نظر ????
-                                            </li>
-                                        </ul>
-                                        <h3>
-                                            <a href="{% url 'article_detail' slug=article.slug %}">
-                                                {{ article.title }}
+                                            </h3>
+                                            <p>
+                                                {{ article.body | truncatewords:75 }}
+                                            </p>
+                                            <a href="{% url 'article_detail' slug=article.slug %}" class="gt-theme-btn">
+                                                بیشتر بخوانید
                                             </a>
-                                        </h3>
-                                        <p>
-                                            {{ article.body | truncatewords:75 }}
-                                        </p>
-                                        <a href="{% url 'article_detail' slug=article.slug %}" class="gt-theme-btn">
-                                            بیشتر بخوانید
-                                        </a>
+                                        </div>
                                     </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="alert alert-warning text-center my-5 py-4 fs-4 rounded-3 shadow">
+                                    هیچ مقاله‌ای در این دسته‌بندی وجود ندارد!
                                 </div>
-                            {% endfor %}
+                            {% endif %}
                             {% if is_paginated %}
                                 <div class="gt-page-nav-wrap pt-5 text-start">
                                     <ul class="justify-content-start">

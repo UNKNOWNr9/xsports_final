@@ -9,3 +9,8 @@ class ArticleManager(models.Manager):
 class ArticleCategoryManager(models.Manager):
     def published(self):
         return self.filter(is_active=True)
+
+
+class ArticleCommentManager(models.Manager):
+    def published(self):
+        return self.filter(status=True)

@@ -1,7 +1,7 @@
 from django.db import models
-from .managers import ArticleManager, ArticleCategoryManager
-from django.urls import reverse
+
 from account_module.models import CustomUser
+from .managers import ArticleManager, ArticleCategoryManager
 
 
 class ArticleCategory(models.Model):
@@ -55,3 +55,17 @@ class Article(models.Model):
                 counter += 1
             self.slug = slug
         super().save(*args, **kwargs)
+
+
+class ArticleComment(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments', verbose_name='مقاله')
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_comments', verbose_name='نویسنده')
+    body = models.TextField(verbose_name='متن کامنت')
+    create_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=False, verbose_name='تایید شده / تایید نشده')
+
+    objects = ArticleCategoryManager()
+
+    class Meta:
+        verbose_name = 'کامنت مقالات'
+        verbose_name_plural = 'کامنت های مقالات'

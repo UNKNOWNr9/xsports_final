@@ -1,5 +1,6 @@
 {% extends 'shared/base.html' %}
 {% load static %}
+{% load thumbnail %}
 {% load render_partial %}
 {% block title %} {{ article.title }} {% endblock %}
 {% block content %}
@@ -13,17 +14,42 @@
                             <img src="{{ article.image.url }}" alt="img">
                         </div>
                         <div class="gt-news-details-content">
+                            <ul class="gt-date-list d-flex mb-3">
+                                <li>
+                                    <i class="fa fa-user"></i>
+                                    نویسنده :
+                                    <a href="{% url 'article_by_author' username=article.author.username %}">
+                                        {% if article.author.get_full_name %}
+                                            {{ article.author.get_full_name }}
+                                        {% else %}
+                                            {{ article.author }}
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                <li class="mx-4">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    {{ article.created_at }}
+                                </li>
+                                <li class="mx-3">
+                                    <i class="fa-solid fa-comments"></i>
+                                    19 نظر ????
+                                </li>
+                            </ul>
                             <h3>{{ article.title }}</h3>
                             <p>
                                 {{ article.body | linebreaks }}
                             </p>
                             <div class="row gt-tag-share-wrap mt-4 mb-5">
-                                <div class="col-lg-8 col-12">
-                                    <div class="tagcloud">
-                                        <span>تگ ها:</span>
-                                        <a href="#">{% for cat in article.category.all %}{{ cat.title }}{% endfor %}</a>
+                                {% if article.category %}
+                                    <div class="col-lg-8 col-12">
+                                        <div class="tagcloud">
+                                            <span>دسته بندی ها:</span>
+                                            {% for cat in article.category.published %}
+                                                <a href="{% url 'article_by_category' cat.slug %}">{{ cat.title }}</a>
+                                            {% endfor %}
+                                        </div>
                                     </div>
-                                </div>
+                                {% endif %}
                                 <div class="col-lg-4 col-12 mt-3 mt-lg-0 text-lg-end">
                                     <div class="social-share">
                                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -69,46 +95,36 @@
                                 <div class="gt-comments-heading">
                                     <h3>2 نظر</h3>
                                 </div>
-                                <div class="gt-blog-single-comment d-flex gap-4 pt-4 pb-4">
-                                    <div class="image">
-                                        <img src="{% static 'shared/img/inner-page/news-details/comment-1.jpg' %}" alt="img">
-                                    </div>
-                                    <div class="gt-content">
-                                        <div class="head d-flex flex-wrap gap-2 align-items-center justify-content-between">
-                                            <div class="con">
-                                                <h5>
-                                                    <a href="#">
-                                                        آدام جان
-                                                    </a>
-                                                </h5>
-                                                <span>پنج اردیبهشت 1404 ساعت 2:33</span>
-                                            </div>
-                                            <a href="#" class="reply">پاسخ دادن</a>
+                                {% for comment in article.comments.published %}
+                                    <div class="gt-blog-single-comment d-flex gap-4 pt-4 pb-4">
+                                        <div class="image">
+                                            {% if article.author.image %}
+                                            	{% thumbnail article.author.image  '96x96' crop='center' as im %}
+                                                    <img src="{{ im.url }}" alt="img">
+                                                {% endthumbnail %}
+                                            {% else %}
+                                                <img src="{% static 'shared/img/unknown-user.png' %}" alt="img" width="96" height="96">
+                                            {% endif %}
                                         </div>
-                                        <p class="mt-2 mb-4">
-                                            سلامت و رفاه شما اولویت‌های اصلی ما هستند. ما وقت می‌گذاریم تا به نگرانی‌های
-                                            شما گوش دهیم و به سوالات شما پاسخ دهیم.لورم ایپسوم متن ساختگی
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="gt-blog-single-comment d-flex gap-4 pt-4 pb-4">
-                                    <div class="image">
-                                        <img src="{% static 'shared/img/inner-page/news-details/comment-2.jpg' %}" alt="img">
-                                    </div>
-                                    <div class="gt-content">
-                                        <div class="head d-flex flex-wrap gap-2 align-items-center justify-content-between">
-                                            <div class="con">
-                                                <h5><a href="#">کریستین واتسونز</a></h5>
-                                                <span>پنج اردیبهشت 1404 ساعت 2:33</span>
+                                        <div class="gt-content">
+                                            <div class="head d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                                                <div class="con">
+                                                    <h5>
+                                                        {% if comment.author.get_full_name %}
+                                                            {{ comment.author.username }}
+                                                        {% else %}
+                                                            {{ comment.author.username }}
+                                                        {% endif %}
+                                                    </h5>
+                                                    <span>{{ comment.create_at }}</span>
+                                                </div>
                                             </div>
-                                            <a href="#" class="reply">پاسخ دادن</a>
+                                            <p class="mt-2 mb-4">
+                                                {{ comment.body }}
+                                            </p>
                                         </div>
-                                        <p class="mt-2 mb-4">
-                                            سلامت و رفاه شما اولویت‌های اصلی ما هستند. ما وقت می‌گذاریم تا به نگرانی‌های
-                                            شما گوش دهیم و به سوالات شما پاسخ دهیم.لورم ایپسوم متن ساختگی
-                                        </p>
                                     </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

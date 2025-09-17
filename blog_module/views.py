@@ -1,7 +1,9 @@
+from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
+
+from account_module.models import CustomUser
 from .models import Article, ArticleCategory
-from django.db.models import Count
 
 
 class ArticleListView(ListView):
@@ -25,10 +27,38 @@ def article_sidebar(request):
     return render(request, 'shared/includes/sidebar.html', context)
 
 
-def article_by_category(request, slug):
-    category = get_object_or_404(ArticleCategory, slug=slug, is_active=True)
-    articles = category.articles.published().order_by('-created_at')
-    context = {
-        'articles': articles
-    }
-    return render(request, 'blog_module/category_detail.html', context)
+class ArticleByCategory(ListView):
+    template_name = 'blog_module/article_by_category.html'
+    paginate_by = 3
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        self.category = get_object_or_404(
+            ArticleCategory, slug=self.kwargs['slug'], is_active=True
+        )
+        return self.category.articles.published().order_by('-created_at')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.category
+        return context
+
+
+class ArticleByAuthor(ListView):
+    template_name = 'blog_module/article_by_author.html'
+    paginate_by = 3
+    context_object_name = 'articles'
+
+    def get_queryset(self):
+        self.author = get_object_or_404(CustomUser, username=self.kwargs['username'])
+        return (
+            Article.objects.published()
+            .filter(author=self.author)
+            .select_related('author')
+            .order_by('-created_at')
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author'] = self.author
+        return context
