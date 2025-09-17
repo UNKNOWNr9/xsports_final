@@ -32,7 +32,7 @@
                                 </li>
                                 <li class="mx-3">
                                     <i class="fa-solid fa-comments"></i>
-                                    19 نظر ????
+                                     {{ article.comments.published.count }}  نظر 
                                 </li>
                             </ul>
                             <h3>{{ article.title }}</h3>
@@ -60,71 +60,74 @@
                                 </div>
                             </div>
                             <div class="gt-comment-form-wrap mt-5">
-                                <h4>نظر خود را بگذارید</h4>
-                                <p>آدرس ایمیل شما منتشر نخواهد شد. فیلدهای الزامی علامت‌گذاری شده‌اند. *</p>
-                                <form action="#" id="contact-form" method="POST">
-                                    <div class="row g-4">
-                                        <div class="col-lg-6">
-                                            <div class="form-clt">
-                                                <span>نام شما</span>
-                                                <input type="text" name="name" id="name" placeholder="نام شما">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-success">{{ message }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                                <h4 class="mb-2">نظر خود را بگذارید : </h4>
+                                <form id="contact-form" method="POST" novalidate> {% csrf_token %}
+                                    {% if request.user.is_authenticated %}
+                                        <div class="row g-4">
+                                            <div class="col-lg-12">
+                                                <div class="form-clt">
+                                                    <span>{{ comment_form.body.label_tag }}</span>
+                                                    {{ comment_form.body }}
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <button type="submit" class="gt-theme-btn">
+                                                    ارسال کامنت ها
+                                                </button>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-clt">
-                                                <span>ایمیل شما</span>
-                                                <input type="text" name="email" id="email6" placeholder="ایمیل شما">
-                                            </div>
+                                    {% else %}
+                                        <div class="alert alert-success">
+                                            برای ارسال کامنت باید <a href="{% url 'login' %}"
+                                                                     class="text-danger">وارد</a> حساب خود شوید!
                                         </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-clt">
-                                                <span>نوشتن پیام</span>
-                                                <textarea name="message" id="message"
-                                                          placeholder="پیام خود را وارد کنید"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <button type="submit" class="gt-theme-btn">
-                                                ارسال کامنت ها
-                                            </button>
-                                        </div>
-                                    </div>
+                                    {% endif %}
                                 </form>
                             </div>
                             <div class="gt-comments-area">
                                 <div class="gt-comments-heading">
-                                    <h3>2 نظر</h3>
+                                    <h3>کامنت ها :</h3>
                                 </div>
-                                {% for comment in article.comments.published %}
-                                    <div class="gt-blog-single-comment d-flex gap-4 pt-4 pb-4">
-                                        <div class="image">
-                                            {% if article.author.image %}
-                                            	{% thumbnail article.author.image  '96x96' crop='center' as im %}
-                                                    <img src="{{ im.url }}" alt="img">
-                                                {% endthumbnail %}
-                                            {% else %}
-                                                <img src="{% static 'shared/img/unknown-user.png' %}" alt="img" width="96" height="96">
-                                            {% endif %}
-                                        </div>
-                                        <div class="gt-content">
-                                            <div class="head d-flex flex-wrap gap-2 align-items-center justify-content-between">
-                                                <div class="con">
-                                                    <h5>
-                                                        {% if comment.author.get_full_name %}
-                                                            {{ comment.author.username }}
-                                                        {% else %}
-                                                            {{ comment.author.username }}
-                                                        {% endif %}
-                                                    </h5>
-                                                    <span>{{ comment.create_at }}</span>
-                                                </div>
+                                {% if article.comments.published %}
+                                    {% for comment in article.comments.published %}
+                                        <div class="gt-blog-single-comment d-flex gap-4 pt-4 pb-4">
+                                            <div class="image">
+                                                {% if article.author.image %}
+                                                    {% thumbnail article.author.image '96x96' crop='center' as im %}
+                                                        <img src="{{ im.url }}" alt="img">
+                                                    {% endthumbnail %}
+                                                {% else %}
+                                                    <img src="{% static 'shared/img/unknown-user.png' %}" alt="img"
+                                                         width="96" height="96">
+                                                {% endif %}
                                             </div>
-                                            <p class="mt-2 mb-4">
-                                                {{ comment.body }}
-                                            </p>
+                                            <div class="gt-content">
+                                                <div class="head d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                                                    <div class="con">
+                                                        <h5>
+                                                            {% if comment.author.get_full_name %}
+                                                                {{ comment.author.username }}
+                                                            {% else %}
+                                                                {{ comment.author.username }}
+                                                            {% endif %}
+                                                        </h5>
+                                                        <span>{{ comment.create_at }}</span>
+                                                    </div>
+                                                </div>
+                                                <p class="mt-2 mb-4">
+                                                    {{ comment.body }}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                {% endfor %}
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="alert alert-warning">هنو هیچ کامنتی برای این پست منتشر نشده</div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

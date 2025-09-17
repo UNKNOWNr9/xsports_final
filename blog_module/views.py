@@ -1,9 +1,10 @@
 from django.db.models import Count
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
-
+from .forms import ArticleCommentForm
 from account_module.models import CustomUser
-from .models import Article, ArticleCategory
+from .models import Article, ArticleCategory, ArticleComment
+from django.contrib import messages
 
 
 class ArticleListView(ListView):
@@ -17,6 +18,31 @@ class ArticleDetail(DetailView):
     template_name = 'blog_module/article_detail.html'
     queryset = Article.objects.published()
     context_object_name = 'article'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        article = self.get_object()
+        context['comment'] = ArticleComment.objects.published().filter(article=article)
+        context['comment_form'] = ArticleCommentForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.error(request, 'برای ارسال نظر باید اول وارد حساب کاربری شوید.')
+            return redirect(request.path)
+        self.object = self.get_object()
+        comment_form = ArticleCommentForm(request.POST)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.article = self.object
+            comment.author = request.user
+            comment.save()
+            messages.success(request, 'کامنت شما ثبت شد، طی 48 ساعت پس از تایید نمایش داده میشود.')
+            return redirect(self.request.path_info)
+        context = self.get_context_data()
+        context['comment_form'] = comment_form
+        return redirect(self.request.path_info)
 
 
 def article_sidebar(request):
