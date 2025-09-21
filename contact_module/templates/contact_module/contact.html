@@ -11,24 +11,39 @@
                         <div class="gt-comment-form-wrap">
                             <h4>ما اینجاییم تا کمک کنیم!</h4>
                             <p>آدرس ایمیل شما منتشر نخواهد شد. فیلدهای ضروری علامت‌گذاری شده‌اند. *</p>
-                            <form action="https://ex-coders.com/html/xports/contact.php" id="contact-form" method="POST">
+                            <form action="{% url 'contact' %}" id="contact-form" method="POST" novalidate> {% csrf_token %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-success">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                {% if contact_form.full_name.errors or contact_form.phone.errors %}
+                                    <div class="alert alert-danger">
+                                        {{ contact_form.full_name.errors }}
+                                    </div>
+                                    <div class="alert alert-danger">
+                                        {{ contact_form.phone.errors }}
+                                    </div>
+                                {% endif %}
                                 <div class="row g-4">
                                     <div class="col-lg-6">
                                         <div class="form-clt">
-                                            <span>نام شما</span>
-                                            <input type="text" name="name" id="name" placeholder="نام شما">
+                                            <span>{{ contact_form.full_name.label_tag }}</span>
+                                            {{ contact_form.full_name }}
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-clt">
-                                            <span>ایمیل شما</span>
-                                            <input type="text" name="email" id="email6" placeholder="ایمیل شما">
+                                            <span>{{ contact_form.phone.label_tag }}</span>
+                                            {{ contact_form.phone }}
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-clt">
-                                            <span>نوشتن پیام</span>
-                                            <textarea name="message" id="message" placeholder="پیام خود را وارد کنید"></textarea>
+                                            <span>{{ contact_form.message.label_tag }}</span>
+                                            {{ contact_form.message }}
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -93,7 +108,6 @@
                     <div class="gt-map-items">
                         <div class="googpemap">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4582.998036589157!2d51.37600610404647!3d35.685151643573214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e00f7c2d3f79b%3A0xddd4f7fecfb9e196!2z2LHYp9iv24zZiNmE2YjamNuMINmI2LPZiNmG2Yjar9ix2KfZgduMINix2YjYr9qp24wgKNii2LLZhdmI2K_Zhyk!5e0!3m2!1sen!2sse!4v1758174461979!5m2!1sen!2sse" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                            style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>

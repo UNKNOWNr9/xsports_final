@@ -1,10 +1,11 @@
-from django.db.models import Count
+from django.contrib import messages
+from django.db.models import Count, Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
-from .forms import ArticleCommentForm
+
 from account_module.models import CustomUser
+from .forms import ArticleCommentForm
 from .models import Article, ArticleCategory, ArticleComment
-from django.contrib import messages
 
 
 class ArticleListView(ListView):
@@ -87,4 +88,28 @@ class ArticleByAuthor(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['author'] = self.author
+        return context
+
+
+class ArticleSearchView(ListView):
+    template_name = 'blog_module/article_list.html'
+    context_object_name = 'articles'
+    paginate_by = 3
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        qs = Article.objects.published()
+        if query:
+            qs = qs.filter(
+                Q(title__icontains=query) |
+                Q(body__icontains=query) |
+                Q(author__first_name__icontains=query) |
+                Q(author__last_name__icontains=query) |
+                Q(author__username__icontains=query)
+            )
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q', '')
         return context

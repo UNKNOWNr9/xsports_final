@@ -22,6 +22,7 @@ class Contact(models.Model):
 
     message = models.TextField(verbose_name='پیام')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
+    is_readed = models.BooleanField(default=False, verbose_name='خوانده شده خوانده نشده')
 
     class Meta:
         verbose_name = 'تیکت'

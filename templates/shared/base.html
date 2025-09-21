@@ -214,8 +214,8 @@
 <div class="search-popup">
     <div class="search-popup__overlay search-toggler"></div>
     <div class="search-popup__content rtl">
-        <form role="search" method="get" class="search-popup__form" action="#">
-            <input type="text" id="search" name="search" placeholder="اینجا جستجو کنید...">
+        <form role="search" method="get" class="search-popup__form" action="{% url 'searchbar' %}">
+            <input type="text" id="search" name="q" placeholder="اینجا جستجو کنید...">
             <button type="submit" aria-label="search submit" class="search-btn">
                 <span><i class="fa-regular fa-magnifying-glass"></i></span>
             </button>

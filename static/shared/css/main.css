@@ -8663,13 +8663,13 @@ span {
   background-color: var(--gt-white);
   font-size: 16px;
   font-weight: 400;
-  color: var(--gt-text);
+  color: black;
   transition: all 500ms ease;
 }
 
 .search-popup__form input[type=search]:focus,
 .search-popup__form input[type=text]:focus {
-  color: var(--gt-header);
+  color: black
 }
 
 .search-popup__form .search-btn {
