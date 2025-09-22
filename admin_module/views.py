@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from django.views.generic import View
+from .forms import EditProfileForm
 
-# Create your views here.
+
+class AdminView(View):
+    pass
