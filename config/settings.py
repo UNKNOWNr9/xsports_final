@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'home_module.apps.HomeModuleConfig',
     'blog_module.apps.BlogModuleConfig',
     'contact_module.apps.ContactModuleConfig',
+    'admin_module.apps.AdminModuleConfig',
     # external apps
     'django_render_partial',
     'sorl.thumbnail',
