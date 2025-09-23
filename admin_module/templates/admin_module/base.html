@@ -45,20 +45,10 @@
                 <a href="{% url 'home' %}" class="nav-link">نمایش سایت</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">پشتیبانی</a>
+                <a href="{% url 'contact' %}" class="nav-link">پشتیبانی</a>
             </li>
         </ul>
         <!-- SEARCH FORM -->
-        <form class="form-inline ml-3">
-            <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="جستوجو" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
     </nav>
     <!-- /.navbar -->
     <!-- Main Sidebar Container -->
@@ -70,7 +60,9 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+{% block content %}
 
+{% endblock %}
 <!-- jQuery -->
 <script src="{% static 'admin_module/plugins/jquery/jquery.min.js' %}"></script>
 <!-- jQuery UI 1.11.4 -->

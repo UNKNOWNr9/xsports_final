@@ -9,7 +9,7 @@ article detail share button via whatsapp instagram ... using django_social_share
 recent posts or popular posts in sidebar
 actions for forms
 search with q and filter.t__icontans==filtering
-
+check admin_module ***** login required mixin
 
 -------------------------------------------------------------------------------------
 # knowledge:
@@ -17,6 +17,7 @@ model managers
 get_absolute_url
 slug converter save() method
 image cropping with sorl_thumbnail
+template tags
 
 -------------------------------------------------------------------------------------
 # template sample
