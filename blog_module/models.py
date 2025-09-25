@@ -1,5 +1,4 @@
 from django.db import models
-
 from account_module.models import CustomUser
 from .managers import ArticleManager, ArticleCategoryManager
 
@@ -63,7 +62,7 @@ class ArticleComment(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_comments',
                                verbose_name='نویسنده')
     body = models.TextField(verbose_name='متن کامنت')
-    create_at = models.DateTimeField(auto_now_add=True)
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     is_active = models.BooleanField(default=False, verbose_name='تایید شده / تایید نشده')
 
     objects = ArticleCategoryManager()

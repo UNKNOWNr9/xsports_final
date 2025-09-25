@@ -9,6 +9,7 @@ check admin_module ***** login required mixin
 fast typing
 Mixin access controls
 separate search for article and shop with {% block search %}
+share posts : article_detail line 53
 
 -------------------------------------------------------------------------------------
 # knowledge:

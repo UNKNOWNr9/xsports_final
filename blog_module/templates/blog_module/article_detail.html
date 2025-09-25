@@ -1,4 +1,4 @@
-{% extends 'blog_module/base.html' %}
+{% extends 'shared/base.html' %}
 {% load static %}
 {% load thumbnail %}
 {% load render_partial %}
@@ -50,14 +50,14 @@
                                         </div>
                                     </div>
                                 {% endif %}
-                                <div class="col-lg-4 col-12 mt-3 mt-lg-0 text-lg-end">
-                                    <div class="social-share">
-                                        <a href="#"><i class="fab fa-twitter"></i></a>
-                                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
-                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    </div>
-                                </div>
+{#                                <div class="col-lg-4 col-12 mt-3 mt-lg-0 text-lg-end">#}
+{#                                    <div class="social-share">#}
+{#                                        <a href="#"><i class="fab fa-twitter"></i></a>#}
+{#                                        <a href="#"><i class="fa-brands fa-youtube"></i></a>#}
+{#                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>#}
+{#                                        <a href="#"><i class="fab fa-facebook-f"></i></a>#}
+{#                                    </div>#}
+{#                                </div>#}
                             </div>
                             <div class="gt-comment-form-wrap mt-5">
                                 {% if messages %}
@@ -126,7 +126,7 @@
                                         </div>
                                     {% endfor %}
                                 {% else %}
-                                    <div class="alert alert-warning">هنو هیچ کامنتی برای این پست منتشر نشده</div>
+                                    <div class="alert alert-warning">هنوز هیچ کامنتی برای این پست منتشر نشده.</div>
                                 {% endif %}
                             </div>
                         </div>
@@ -137,5 +137,5 @@
         </div>
     </section>
     <!-- GT Newsletter Section Start -->
-    {% include 'blog_module/includes/advertising_banner.html' %}
+    {% include 'shared/includes/advertising_banner.html' %}
 {% endblock %}
