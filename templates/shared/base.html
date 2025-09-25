@@ -162,7 +162,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="{% url 'product_list' %}">
                                             فروشگاه
                                         </a>
                                     </li>
@@ -216,7 +216,6 @@
     </div>
 </div>
 
-
 <!-- GT Banner Start -->
 <section class="hero-section hero-1 fix bg-cover rtl"
          style="background-image: url({% static 'shared/img/home-1/hero/hero-bg.jpg' %});">
@@ -235,7 +234,7 @@
                         {% block banner_body %}برنامه نویس پایتون{% endblock %}
                     </h1>
                     <div class="gt-hero-button wow animated-image">
-                        <a href="#" class="gt-theme-btn">فروشگاه</a>
+                        <a href="{% url 'product_list' %}" class="gt-theme-btn">فروشگاه</a>
                         <a href="{% url 'article_list' %}" class="gt-theme-btn-blue">وبلاگ</a>
                     </div>
                 </div>
@@ -248,6 +247,7 @@
 
 {% endblock %}
 <!--<< All JS Plugins >>-->
+{% include 'shared/includes/site_footer_components.html' %}
 {% include 'shared/includes/footer_references.html' %}
 </body>
 <!-- Mirrored from ex-coders.com/html/xports/# by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 25 May 2025 06:47:07 GMT -->

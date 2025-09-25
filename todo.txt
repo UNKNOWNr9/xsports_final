@@ -10,6 +10,10 @@ fast typing
 Mixin access controls
 separate search for article and shop with {% block search %}
 share posts : article_detail line 53
+like dislike system with ajax
+404 page if user changes url
+
+
 
 -------------------------------------------------------------------------------------
 # knowledge:

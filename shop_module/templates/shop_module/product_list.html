@@ -1,0 +1,114 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block title %}فروشگاه{% endblock %}
+{% block banner_title %}بهترین محصولات ما را ببینید !{% endblock %}
+{% block banner_body %}برترین محصولات از همه دسته‌بندی‌ها{% endblock %}
+{% block content %}
+    <!-- GT Shop Section Start -->
+    <section class="gt-shop-section section-padding fix">
+        <div class="container rtl">
+            <div class="row">
+                <!-- محصولات (راست) -->
+                <div class="col-lg-8 col-12">
+                    <div class="row g-4">
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="gt-shop-card-item gt-style-2 mt-0">
+                                <span>25 درصد تخفیف</span>
+                                <div class="gt-shop-image">
+                                    <img src="{% static 'shared/img/home-1/shop/shop-1.png' %}" alt="img">
+                                    <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
+                                        <li><a href="#"><i class="far fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="far fa-shopping-cart"></i></a></li>
+                                        <li>
+                                            <button data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
+                                                    class="far fa-eye"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="gt-shop-content">
+                                    <h5><a href="#">کنسول بازی عینک و کنترلرها</a></h5>
+                                    <p>280تومان-380تومان</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="gt-shop-card-item gt-style-2 mt-0">
+                                <span>25 درصد تخفیف</span>
+                                <div class="gt-shop-image">
+                                    <img src="{% static 'shared/img/home-1/shop/shop-1.png' %}" alt="img">
+                                    <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
+                                        <li><a href="#"><i class="far fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="far fa-shopping-cart"></i></a></li>
+                                        <li>
+                                            <button data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
+                                                    class="far fa-eye"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="gt-shop-content">
+                                    <h5><a href="#">کنسول بازی عینک و کنترلرها</a></h5>
+                                    <p>280تومان-380تومان</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="gt-shop-card-item gt-style-2 mt-0">
+                                <span>25 درصد تخفیف</span>
+                                <div class="gt-shop-image">
+                                    <img src="{% static 'shared/img/home-1/shop/shop-1.png' %}" alt="img">
+                                    <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
+                                        <li><a href="#"><i class="far fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="far fa-shopping-cart"></i></a></li>
+                                        <li>
+                                            <button data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
+                                                    class="far fa-eye"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="gt-shop-content">
+                                    <h5><a href="#">کنسول بازی عینک و کنترلرها</a></h5>
+                                    <p>280تومان-380تومان</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6">
+                            <div class="gt-shop-card-item gt-style-2 mt-0">
+                                <span>25 درصد تخفیف</span>
+                                <div class="gt-shop-image">
+                                    <img src="{% static 'shared/img/home-1/shop/shop-1.png' %}" alt="img">
+                                    <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
+                                        <li><a href="#"><i class="far fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="far fa-shopping-cart"></i></a></li>
+                                        <li>
+                                            <button data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
+                                                    class="far fa-eye"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="gt-shop-content">
+                                    <h5><a href="#">کنسول بازی عینک و کنترلرها</a></h5>
+                                    <p>280تومان-380تومان</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- صفحه‌بندی -->
+                    <div class="gt-page-nav-wrap pt-5 text-center">
+                        <ul>
+                            <li><a class="gt-page-numbers" href="#"><i class="fa-solid fa-chevron-right"></i></a></li>
+                            <li><a class="gt-page-numbers" href="#">01</a></li>
+                            <li><a class="gt-page-numbers active" href="#">02</a></li>
+                            <li><a class="gt-page-numbers" href="#">03</a></li>
+                            <li><a class="gt-page-numbers" href="#">04</a></li>
+                            <li><a class="gt-page-numbers" href="#"><i class="fa-solid fa-chevron-left"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- سایدبار (چپ) -->
+                {% include 'shop_module/includes/sidebar.html' %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
