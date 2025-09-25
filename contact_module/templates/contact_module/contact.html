@@ -1,6 +1,9 @@
-{% extends 'shared/base.html' %}
+{% extends 'blog_module/base.html' %}
 {% load static %}
 {% block title %}تماس با ما{% endblock %}
+{% block banner_title %}تماس با من{% endblock %}
+{% block banner_body %}لطفاً فرم زیر را پر کنید.{% endblock %}
+
 {% block content %}
     <!-- GT Contact-us Section Start -->
     <section class="gt-contact-us-section section-padding fix rtl">
@@ -10,7 +13,7 @@
                     <div class="col-lg-8">
                         <div class="gt-comment-form-wrap">
                             <h4>ما اینجاییم تا کمک کنیم!</h4>
-                            <p>آدرس ایمیل شما منتشر نخواهد شد. فیلدهای ضروری علامت‌گذاری شده‌اند. *</p>
+                            <p>تلفن همراه شما منتشر نخواهد شد. تمامی فیلد ها الزامی میباشد.</p>
                             <form action="{% url 'contact' %}" id="contact-form" method="POST" novalidate> {% csrf_token %}
                                 {% if messages %}
                                     {% for message in messages %}

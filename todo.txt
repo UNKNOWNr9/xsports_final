@@ -3,13 +3,12 @@ opt sms panel for registration
 email service fail log
 hide the important settings in setting.py to .env gitignore
 add persian datetime to templates with templatetags or packages
-authors posts show in template
-rewrite article_by_category & article_by_author with CBV or FBV with pagination
 article detail share button via whatsapp instagram ... using django_social_share
-recent posts or popular posts in sidebar
 actions for forms
-search with q and filter.t__icontans==filtering
 check admin_module ***** login required mixin
+fast typing
+Mixin access controls
+separate search for article and shop with {% block search %}
 
 -------------------------------------------------------------------------------------
 # knowledge:
@@ -19,6 +18,8 @@ slug converter save() method
 image cropping with sorl_thumbnail
 template tags
 get context data in CBV
+search with q and filter.t__icontans==filtering
+mixins
 
 -------------------------------------------------------------------------------------
 # template sample

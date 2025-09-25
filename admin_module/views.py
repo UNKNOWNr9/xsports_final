@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from account_module.models import CustomUser
 from django.contrib import messages
 
+
 class ProfileView(View):
     def get(self, request):
         user = request.user

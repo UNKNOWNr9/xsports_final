@@ -1,8 +1,10 @@
-{% extends 'shared/base.html' %}
+{% extends 'blog_module/base.html' %}
 {% load static %}
 {% load thumbnail %}
 {% load render_partial %}
 {% block title %}وبلاگ{% endblock %}
+{% block banner_title %}بخش وبلاگ{% endblock %}
+{% block banner_body %}آخرین مطالب و نوشته‌های سایت{% endblock %}
 {% block content %}
     <!-- GT News-standard Section Start -->
     <section class="news-standard-section section-padding rtl">
@@ -89,5 +91,5 @@
         </div>
     </section>
     <!-- GT Newsletter Section Start -->
-    {% include 'shared/includes/advertising_banner.html' %}
+    {% include 'blog_module/includes/advertising_banner.html' %}
 {% endblock %}

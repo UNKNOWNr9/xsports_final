@@ -47,11 +47,13 @@ class ArticleDetail(DetailView):
 
 
 def article_sidebar(request):
+    latest_articles = Article.objects.published().order_by('-created_at')[:3]
     categories = ArticleCategory.objects.filter(is_active=True).annotate(count=Count('articles'))
     context = {
-        'categories': categories
+        'latest_articles': latest_articles,
+        'categories': categories,
     }
-    return render(request, 'shared/includes/sidebar.html', context)
+    return render(request, 'blog_module/includes/sidebar.html', context)
 
 
 class ArticleByCategory(ListView):

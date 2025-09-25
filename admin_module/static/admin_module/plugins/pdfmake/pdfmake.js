@@ -46558,7 +46558,7 @@ var OTLayoutEngine = function () {
     var _this = this;
 
     // Map glyphs to GlyphInfo objects so data can be passed between
-    // GSUB and GPOS without mutating the real (shared) Glyph objects.
+    // GSUB and GPOS without mutating the real (blog_module) Glyph objects.
     this.glyphInfos = glyphRun.glyphs.map(function (glyph) {
       return new GlyphInfo(_this.font, glyph.id, [].concat(glyph.codePoints));
     });
