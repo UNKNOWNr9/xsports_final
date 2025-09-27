@@ -1,12 +1,13 @@
 from django.contrib import admin
-from .models import Article, ArticleCategory, ArticleComment
 from django.utils.html import format_html
+
+from .models import Article, ArticleCategory, ArticleComment
 
 
 @admin.register(ArticleCategory)
 class ArticleCategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug', 'is_active']
-    list_filter = ['is_active']
+    list_filter = ['is_active', ]
     search_fields = ['title', ]
 
 
