@@ -12,7 +12,7 @@ separate search for article and shop with {% block search %}
 share posts : article_detail line 53
 like dislike system with ajax
 404 page if user changes url
-
+login expire
 
 
 -------------------------------------------------------------------------------------
@@ -28,5 +28,5 @@ mixins
 
 -------------------------------------------------------------------------------------
 # template sample
-https://ex-coders.com/
+https://ex-coders.com/ search in google ex-coders to open
 -------------------------------------------------------------------------------------
