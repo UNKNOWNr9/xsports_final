@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.html import format_html
 
+from .managers import ProductManager
+
 
 class Color(models.Model):
     title = models.CharField(max_length=20, verbose_name='عنوان')
@@ -25,6 +27,7 @@ class Product(models.Model):
     is_active = models.BooleanField(verbose_name='فعال / غیرفعال')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ آپدیت')
+    objects = ProductManager()
 
     class Meta:
         verbose_name = 'محصول'
