@@ -1,5 +1,7 @@
 {% extends 'shared/base.html' %}
 {% load static %}
+{% load custom_filters %}
+{% load thumbnail %}
 {% block title %}فروشگاه{% endblock %}
 {% block banner_title %}بهترین محصولات ما را ببینید !{% endblock %}
 {% block banner_body %}برترین محصولات از همه دسته‌بندی‌ها{% endblock %}
@@ -16,7 +18,9 @@
                                 <div class="gt-shop-card-item gt-style-2 mt-0">
                                     {#<span>25 درصد تخفیف</span>#}
                                     <div class="gt-shop-image">
-                                        <img src="{% static 'shared/img/home-1/shop/shop-1.png' %}" alt="img">
+                                        {% thumbnail product.image "230x175" crop="center" as im %}
+                                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                        {% endthumbnail %}
                                         <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
                                             <li><a href="#"><i class="far fa-heart"></i></a></li>
                                             <li><a href="#"><i class="far fa-shopping-cart"></i></a></li>
@@ -27,26 +31,36 @@
                                         </ul>
                                     </div>
                                     <div class="gt-shop-content">
-                                        <h5><a href="#">کنسول بازی عینک و کنترلرها</a></h5>
-                                        <p>280تومان-380تومان</p>
+                                        <h4><a href="#">{{ product.title | truncatechars:20 }}</a></h4>
+                                        <p>قیمت: {{ product.price|intcomma }}</p>
+                                        <p>ريال</p>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
                     </div>
                     <!-- صفحه‌بندی -->
-                    <div class="gt-page-nav-wrap pt-5 text-center">
-                        <ul>
-                            <li><a class="gt-page-numbers" href="#"><i class="fa-solid fa-chevron-right"></i></a></li>
-                            <li><a class="gt-page-numbers" href="#">01</a></li>
-                            <li><a class="gt-page-numbers active" href="#">02</a></li>
-                            <li><a class="gt-page-numbers" href="#">03</a></li>
-                            <li><a class="gt-page-numbers" href="#">04</a></li>
-                            <li><a class="gt-page-numbers" href="#"><i class="fa-solid fa-chevron-left"></i></a></li>
-                        </ul>
-                    </div>
+                    {% if is_paginated %}
+                        <div class="gt-page-nav-wrap pt-5 text-center">
+                            <ul>
+                                {% if page_obj.has_previous %}
+                                    <li><a class="gt-page-numbers" href="?page={{ page_obj.previous_page_number }}"><i
+                                            class="fa-solid fa-chevron-right"></i></a></li>
+                                {% endif %}
+                                {% for page_number in paginator.page_range %}
+                                    <li>
+                                        <a class="gt-page-numbers {% if page_obj.number == page_number %}active{% endif %}"
+                                           href="?page={{ page_number }}">{{ page_number }}</a></li>
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a class="gt-page-numbers" href="?page={{ page_obj.next_page_number }}"><i
+                                            class="fa-solid fa-chevron-left"></i></a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
                 </div>
-
                 <!-- سایدبار (چپ) -->
                 {% include 'shop_module/includes/sidebar.html' %}
             </div>
