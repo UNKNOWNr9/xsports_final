@@ -1,5 +1,6 @@
 {% extends 'shared/base.html' %}
 {% load static %}
+{% load thumbnail %}
 {% block title %}فروشگاه | {{ products.title }}{% endblock %}
 {% block banner_title %}بهترین محصولات ما را ببینید !{% endblock %}
 {% block banner_body %}برترین محصولات از همه دسته‌بندی‌ها{% endblock %}
@@ -10,37 +11,12 @@
                 <div class="row g-4">
                     <div class="col-lg-6">
                         <div class="gt-shop-details-left-item">
-                            <ul class="nav">
-                                <li class="nav-item">
-                                    <a href="#thumb1" data-bs-toggle="tab" class="nav-link ps-0">
-                                        <img src="{% static 'shared/img/inner-page/shop-details/product-1.jpg' %}" alt="img">
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#thumb2" data-bs-toggle="tab" class="nav-link active">
-                                        <img src="{% static 'shared/img/inner-page/shop-details/product-2.jpg' %}" alt="img">
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#thumb3" data-bs-toggle="tab" class="nav-link">
-                                        <img src="{% static 'shared/img/inner-page/shop-details/product-2.jpg' %}" alt="img">
-                                    </a>
-                                </li>
-                            </ul>
                             <div class="tab-content">
-                                <div id="thumb1" class="tab-pane fade">
-                                    <div class="shop-thumb">
-                                        <img src="{% static 'shared/img/inner-page/shop-details/product-4.jpg' %}" alt="img">
-                                    </div>
-                                </div>
                                 <div id="thumb2" class="tab-pane fade show active">
                                     <div class="shop-thumb">
-                                        <img src="{% static 'shared/img/inner-page/shop-details/product-4.jpg' %}" alt="img">
-                                    </div>
-                                </div>
-                                <div id="thumb3" class="tab-pane fade">
-                                    <div class="shop-thumb">
-                                        <img src="{% static 'shared/img/inner-page/shop-details/product-4.jpg' %}" alt="img">
+                                        {% thumbnail product.image '480x480' crop="center" as im %}
+                                            <img src="{{ im.url }}" alt="img">
+                                        {% endthumbnail %}
                                     </div>
                                 </div>
                             </div>
@@ -150,36 +126,17 @@
                             <div class="row g-4">
                                 <div class="col-lg-6">
                                     <div class="gt-description-content">
-                                        <h5>درباره صندلی بازی</h5>
+                                        <h5>درباره محصول</h5>
                                         <p>
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط
-                                        </p>
-                                        <ul class="gt-list">
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                لورم ایپسوم متن ساختگی با تولید سادگی
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                لورم ایپسوم متن ساختگی با تولید سادگی
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                لورم ایپسوم متن ساختگی با تولید سادگی
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                لورم ایپسوم متن ساختگی با تولید سادگی
-                                            </li>
-                                        </ul>
-                                        <p>
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع
+                                            {{ product.body | linebreaks }}
                                         </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="gt-thumb">
-                                        <img src="{% static 'shared/img/inner-page/shop-details/details-1.jpg' %}" alt="img">
+                                        {% thumbnail product.image '690x500' crop="center" as im %}
+                                            <img src="{{ im.url }}" alt="img">
+                                        {% endthumbnail %}
                                     </div>
                                 </div>
                             </div>
@@ -233,11 +190,14 @@
                                         <i class="fa-solid fa-star"></i>
                                     </div>
                                     <p>
-                                        صندلی گیمینگ قابل تنظیم با طراحی قرمز بسیار راحت و شیک است. پارچه‌اش هم احساس خوبی دارد. می‌خواهم از اکسپورت برای فرآیند سریع تحویل تشکر کنم. من فقط در 2 روز محصول را دریافت کردم. به طور کلی توصیه می‌شود.
+                                        صندلی گیمینگ قابل تنظیم با طراحی قرمز بسیار راحت و شیک است. پارچه‌اش هم احساس
+                                        خوبی دارد. می‌خواهم از اکسپورت برای فرآیند سریع تحویل تشکر کنم. من فقط در 2 روز
+                                        محصول را دریافت کردم. به طور کلی توصیه می‌شود.
                                     </p>
                                     <div class="th-client-info">
                                         <div class="th-client-image">
-                                            <img src="{% static 'shared/img/inner-page/shop-details/client-1.jpg' %}" alt="img">
+                                            <img src="{% static 'shared/img/inner-page/shop-details/client-1.jpg' %}"
+                                                 alt="img">
                                         </div>
                                         <div class="th-info-text">
                                             <h6>توسط <span>: کافی دیوید وان</span></h6>
@@ -253,11 +213,14 @@
                                         <i class="fa-solid fa-star"></i>
                                     </div>
                                     <p>
-                                        صندلی گیمینگ قابل تنظیم با طراحی قرمز بسیار راحت و شیک است. پارچه‌اش هم احساس خوبی دارد. می‌خواهم از اکسپورت برای فرآیند سریع تحویل تشکر کنم. من فقط در 2 روز محصول را دریافت کردم. به طور کلی توصیه می‌شود.
+                                        صندلی گیمینگ قابل تنظیم با طراحی قرمز بسیار راحت و شیک است. پارچه‌اش هم احساس
+                                        خوبی دارد. می‌خواهم از اکسپورت برای فرآیند سریع تحویل تشکر کنم. من فقط در 2 روز
+                                        محصول را دریافت کردم. به طور کلی توصیه می‌شود.
                                     </p>
                                     <div class="th-client-info">
                                         <div class="th-client-image">
-                                            <img src="{% static 'shared/img/inner-page/shop-details/client-2.jpg' %}" alt="img">
+                                            <img src="{% static 'shared/img/inner-page/shop-details/client-2.jpg' %}"
+                                                 alt="img">
                                         </div>
                                         <div class="th-info-text">
                                             <h6>توسط<span>: مایکل وان</span></h6>
@@ -285,14 +248,17 @@
                                             <div class="col-lg-12">
                                                 <div class="form-clt">
                                                     <span>نوشتن پیام</span>
-                                                    <textarea name="message" id="message" placeholder="پیام خود را وارد کنید"></textarea>
+                                                    <textarea name="message" id="message"
+                                                              placeholder="پیام خود را وارد کنید"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                           id="flexCheckDefault">
                                                     <label class="form-check-label" for="flexCheckDefault">
-                                                        نام، ایمیل و وب‌سایت من را در این مرورگر برای دفعه بعدی که نظر می‌گذارم ذخیره کن.
+                                                        نام، ایمیل و وب‌سایت من را در این مرورگر برای دفعه بعدی که نظر
+                                                        می‌گذارم ذخیره کن.
                                                     </label>
                                                 </div>
                                                 <button type="submit" class="gt-theme-btn">
