@@ -1,0 +1,456 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block title %}فروشگاه | {{ products.title }}{% endblock %}
+{% block banner_title %}بهترین محصولات ما را ببینید !{% endblock %}
+{% block banner_body %}برترین محصولات از همه دسته‌بندی‌ها{% endblock %}
+{% block content %}
+    <section class="gt-shop-details-section section-padding fix rtl">
+        <div class="container">
+            <div class="shop-details-wrapper">
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="gt-shop-details-left-item">
+                            <ul class="nav">
+                                <li class="nav-item">
+                                    <a href="#thumb1" data-bs-toggle="tab" class="nav-link ps-0">
+                                        <img src="{% static 'shared/img/inner-page/shop-details/product-1.jpg' %}" alt="img">
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#thumb2" data-bs-toggle="tab" class="nav-link active">
+                                        <img src="{% static 'shared/img/inner-page/shop-details/product-2.jpg' %}" alt="img">
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#thumb3" data-bs-toggle="tab" class="nav-link">
+                                        <img src="{% static 'shared/img/inner-page/shop-details/product-2.jpg' %}" alt="img">
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="thumb1" class="tab-pane fade">
+                                    <div class="shop-thumb">
+                                        <img src="{% static 'shared/img/inner-page/shop-details/product-4.jpg' %}" alt="img">
+                                    </div>
+                                </div>
+                                <div id="thumb2" class="tab-pane fade show active">
+                                    <div class="shop-thumb">
+                                        <img src="{% static 'shared/img/inner-page/shop-details/product-4.jpg' %}" alt="img">
+                                    </div>
+                                </div>
+                                <div id="thumb3" class="tab-pane fade">
+                                    <div class="shop-thumb">
+                                        <img src="{% static 'shared/img/inner-page/shop-details/product-4.jpg' %}" alt="img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="gt-shop-details-content">
+                            <ul class="gt-tag-list">
+                                <li>
+                                    <i class="fa-solid fa-tag"></i>
+                                    کتگوری
+                                </li>
+                            </ul>
+                            <h4>
+                                {{ product.title }}
+                            </h4>
+                            <div class="star">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star gt-color"></i>
+                                <span>(۱ نظر مشتری)</span>
+                            </div>
+                            <div class="gt-list-item">
+                                <h6>ویژگی‌های کلیدی</h6>
+                                <ul class="gt-list">
+                                    <li>
+                                        کاور مصنوعی کاملا گیاهی
+                                    </li>
+                                    <li>
+                                        دستگاه های حمایت ثابت با بالشتک نرم
+                                    </li>
+                                    <li>
+                                        مکانیزم صخره‌ای فوق‌العاده تا 15 درجه
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gt-price-item">
+                                <h6>
+                                    قیمت عادی <span>: 120 تومان</span>
+                                </h6>
+                                <h6 class="gt-bg">
+                                    قیمت تخفیف خورده <span class="gt-color">: 999 تومان</span>
+                                </h6>
+                                <h6>
+                                    کد محصول : 18396
+                                </h6>
+                            </div>
+                            <h6 class="gt-text">
+                                وضعیت <span>: موجود در انبار</span>
+                            </h6>
+                            <div class="gt-color-list">
+                                <h6>
+                                    انتخاب رنگ :
+                                </h6>
+                                <ul class="gt-list-color-product">
+                                    <li class="list-color-item color-swatch active">
+                                        <span class="swatch-value gt-bg-color"></span>
+                                    </li>
+                                    <li class="list-color-item color-swatch">
+                                        <span class="swatch-value gt-bg-color-2"></span>
+                                    </li>
+                                    <li class="list-color-item color-swatch">
+                                        <span class="swatch-value gt-bg-color-3"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gt-button-wrapper">
+                                <div class="cart-quantity">
+                                    <p class="qty">
+                                        <button class="qtyminus" aria-hidden="true">−</button>
+                                        <input type="number" name="qty" id="qty2" min="1" max="10" step="1" value="1">
+                                        <button class="qtyplus" aria-hidden="true">+</button>
+                                    </p>
+                                </div>
+                                <a href="#" class="gt-theme-btn">
+                                    افزودن به سبدخرید
+                                </a>
+                                <a href="#" class="gt-theme-btn gt-style-border style-2">
+                                    الان خرید کن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gt-shop-tab-area">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="#Description" data-bs-toggle="tab" class="nav-link active">
+                                توضیحات
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#Additional" data-bs-toggle="tab" class="nav-link">
+                                اطلاعات اضافی
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#Reviews" data-bs-toggle="tab" class="nav-link">
+                                نظرات مشتریان
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="Description" class="tab-pane fade show active">
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="gt-description-content">
+                                        <h5>درباره صندلی بازی</h5>
+                                        <p>
+                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط
+                                        </p>
+                                        <ul class="gt-list">
+                                            <li>
+                                                <i class="fa-solid fa-check"></i>
+                                                لورم ایپسوم متن ساختگی با تولید سادگی
+                                            </li>
+                                            <li>
+                                                <i class="fa-solid fa-check"></i>
+                                                لورم ایپسوم متن ساختگی با تولید سادگی
+                                            </li>
+                                            <li>
+                                                <i class="fa-solid fa-check"></i>
+                                                لورم ایپسوم متن ساختگی با تولید سادگی
+                                            </li>
+                                            <li>
+                                                <i class="fa-solid fa-check"></i>
+                                                لورم ایپسوم متن ساختگی با تولید سادگی
+                                            </li>
+                                        </ul>
+                                        <p>
+                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="gt-thumb">
+                                        <img src="{% static 'shared/img/inner-page/shop-details/details-1.jpg' %}" alt="img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Additional" class="tab-pane fade">
+                            <div class="gt-information-list-item">
+                                <h5>اطلاعات اضافی</h5>
+                                <div class="gt-inform-item">
+                                    <div class="gt-inform-text">
+                                        <h6>مواد</h6>
+                                        <span>پی یو، پی وی سی</span>
+                                    </div>
+                                    <div class="gt-inform-text">
+                                        <h6>پشتی‌های قابل تنظیم</h6>
+                                        <span>پشتی دسته دو بعدی، ارتفاع پشتی دسته: 34 سانتی‌متر</span>
+                                    </div>
+                                    <div class="gt-inform-text">
+                                        <h6>زاویه پشتی/ خمیدگی</h6>
+                                        <span>عرض تکیه‌گاه: 57 سانتی‌متر، ارتفاع تکیه‌گاه: 85 سانتی‌متر</span>
+                                    </div>
+                                    <div class="gt-inform-text">
+                                        <h6>منطقه نشیمن</h6>
+                                        <span>ارتفاع قابل تنظیم صندلی: 44 - 54 سانتی‌متر</span>
+                                    </div>
+                                    <div class="gt-inform-text">
+                                        <h6>پشتی سر</h6>
+                                        <span>پشتی‌های قابل جداشدن برای سر و کمر</span>
+                                    </div>
+                                    <div class="gt-inform-text">
+                                        <h6>وزن صندلی</h6>
+                                        <span>14 کیلو گرم</span>
+                                    </div>
+                                    <div class="gt-inform-text">
+                                        <h6>رنگ ها</h6>
+                                        <span>قرمز</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="Reviews" class="tab-pane fade">
+                            <div class="th-coustumer-riview">
+                                <h5>نقد و بررسی (02)</h5>
+                                <p>
+                                    جزئیات خاصی درباره این محصول از مشتریانی که آن را دارند بگیرید.
+                                </p>
+                                <div class="th-review-item">
+                                    <div class="star">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <p>
+                                        صندلی گیمینگ قابل تنظیم با طراحی قرمز بسیار راحت و شیک است. پارچه‌اش هم احساس خوبی دارد. می‌خواهم از اکسپورت برای فرآیند سریع تحویل تشکر کنم. من فقط در 2 روز محصول را دریافت کردم. به طور کلی توصیه می‌شود.
+                                    </p>
+                                    <div class="th-client-info">
+                                        <div class="th-client-image">
+                                            <img src="{% static 'shared/img/inner-page/shop-details/client-1.jpg' %}" alt="img">
+                                        </div>
+                                        <div class="th-info-text">
+                                            <h6>توسط <span>: کافی دیوید وان</span></h6>
+                                            <span>شش خرداد1404</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="th-review-item gt-style-2">
+                                    <div class="star">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <p>
+                                        صندلی گیمینگ قابل تنظیم با طراحی قرمز بسیار راحت و شیک است. پارچه‌اش هم احساس خوبی دارد. می‌خواهم از اکسپورت برای فرآیند سریع تحویل تشکر کنم. من فقط در 2 روز محصول را دریافت کردم. به طور کلی توصیه می‌شود.
+                                    </p>
+                                    <div class="th-client-info">
+                                        <div class="th-client-image">
+                                            <img src="{% static 'shared/img/inner-page/shop-details/client-2.jpg' %}" alt="img">
+                                        </div>
+                                        <div class="th-info-text">
+                                            <h6>توسط<span>: مایکل وان</span></h6>
+                                            <span>در شش خرداد 1404</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="gt-comment-form-wrap mt-5">
+                                    <h4>یک بررسی اضافه کنید</h4>
+                                    <p>جزئیات خاصی درباره این محصول از مشتریانی که آن را دارند بگیرید.</p>
+                                    <form action="#" id="contact-form" method="POST">
+                                        <div class="row g-4">
+                                            <div class="col-lg-6">
+                                                <div class="form-clt">
+                                                    <span>نام شما</span>
+                                                    <input type="text" name="name" id="name" placeholder="نام شما">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-clt">
+                                                    <span>ایمیل شما</span>
+                                                    <input type="text" name="email" id="email6" placeholder="ایمیل شما">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-clt">
+                                                    <span>نوشتن پیام</span>
+                                                    <textarea name="message" id="message" placeholder="پیام خود را وارد کنید"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        نام، ایمیل و وب‌سایت من را در این مرورگر برای دفعه بعدی که نظر می‌گذارم ذخیره کن.
+                                                    </label>
+                                                </div>
+                                                <button type="submit" class="gt-theme-btn">
+                                                    <span class="gt-text-btn">ارسال کامنت ها</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GT Shop Section Start -->
+    <section class="gt-shop-accesories-section section-padding fix pt-0">
+        <div class="array-buttons">
+            <button class="array-prev"><i class="fa-solid fa-arrow-down"></i></button>
+            <button class="array-next"><i class="fa-solid fa-arrow-up"></i></button>
+        </div>
+        <div class="container rtl">
+            <div class="gt-section-title-2 text-center">
+                <h6 class="wow fadeInUp">تجهیزات بازی</h6>
+                <h2 class="wow fadeInUp" data-wow-delay=".3s">
+                    محصولات مشابه
+                </h2>
+            </div>
+            <div class="swiper gt-shop-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="gt-shop-card-item gt-style-2">
+                            <span>25 درصد تخفیف</span>
+                            <div class="gt-shop-image">
+                                <img src="{% static 'shared/img/home-1/shop/shop-5.png' %}" alt="img">
+                                <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
+                                    <li>
+                                        <a href="#"><i class="far fa-heart"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gt-shop-content">
+                                <h5>
+                                    <a href="#">
+                                        صفحه کلید نورانی با ماوس پد
+                                    </a>
+                                </h5>
+                                <p>$185.10 - $285.30</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="gt-shop-card-item gt-style-2">
+                            <span>25 درصد تخفیف</span>
+                            <div class="gt-shop-image">
+                                <img src="{% static 'shared/img/home-1/shop/shop-6.png' %}" alt="img">
+                                <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
+                                    <li>
+                                        <a href="#"><i class="far fa-heart"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gt-shop-content">
+                                <h5>
+                                    <a href="#">
+                                        عینک‌های واقعیت مجازی و کنترلرها
+                                    </a>
+                                </h5>
+                                <p>280تومان-380تومان</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="gt-shop-card-item gt-style-2">
+                            <span>25 درصد تخفیف</span>
+                            <div class="gt-shop-image">
+                                <img src="{% static 'shared/img/home-1/shop/shop-7.png' %}" alt="img">
+                                <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
+                                    <li>
+                                        <a href="#"><i class="far fa-heart"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gt-shop-content">
+                                <h5>
+                                    <a href="#">
+                                        عینک‌های واقعیت مجازی و کنترلرها
+                                    </a>
+                                </h5>
+                                <p>280تومان-380تومان</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="gt-shop-card-item gt-style-2">
+                            <span>25 درصد تخفیف</span>
+                            <div class="gt-shop-image">
+                                <img src="{% static 'shared/img/home-1/shop/shop-8.png' %}" alt="img">
+                                <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
+                                    <li>
+                                        <a href="#"><i class="far fa-heart"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="gt-shop-content">
+                                <h5>
+                                    <a href="#">
+                                        عینک‌های واقعیت مجازی و کنترلرها
+                                    </a>
+                                </h5>
+                                <p>280تومان-380تومان</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
