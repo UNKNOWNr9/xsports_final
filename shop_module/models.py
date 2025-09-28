@@ -53,3 +53,16 @@ class Product(models.Model):
         return "—"
 
     image_tag.short_description = "تصویر"
+
+
+class ProductKeyFeatures(models.Model):
+    title = models.CharField(max_length=60, verbose_name='عنوان')
+    status = models.BooleanField(verbose_name='نکته مثبت / نکته منفی')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='key_features', verbose_name='محصول')
+
+    class Meta:
+        verbose_name = 'ویژگی های محصول'
+        verbose_name_plural = 'ویژگی های محصولات'
+
+    def __str__(self):
+        return self.title

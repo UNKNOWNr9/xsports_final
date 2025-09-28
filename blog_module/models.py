@@ -1,6 +1,6 @@
 from django.db import models
 from account_module.models import CustomUser
-from .managers import ArticleManager, ArticleCategoryManager
+from .managers import ArticleManager, ArticleCategoryManager, ArticleCommentManager
 
 
 class ArticleCategory(models.Model):
@@ -65,7 +65,7 @@ class ArticleComment(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     is_active = models.BooleanField(default=False, verbose_name='تایید شده / تایید نشده')
 
-    objects = ArticleCategoryManager()
+    objects = ArticleCommentManager()
 
     class Meta:
         verbose_name = 'کامنت مقالات'

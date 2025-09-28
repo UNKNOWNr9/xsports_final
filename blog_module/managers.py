@@ -13,4 +13,4 @@ class ArticleCategoryManager(models.Manager):
 
 class ArticleCommentManager(models.Manager):
     def published(self):
-        return self.filter(status=True)
+        return self.filter(is_active=True)

@@ -1,7 +1,7 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 {% load thumbnail %}
-{% block title %}فروشگاه | {{ products.title }}{% endblock %}
+{% block title %}فروشگاه | {{ product.title }}{% endblock %}
 {% block banner_title %}بهترین محصولات ما را ببینید !{% endblock %}
 {% block banner_body %}برترین محصولات از همه دسته‌بندی‌ها{% endblock %}
 {% block content %}
@@ -45,13 +45,9 @@
                                 <h6>ویژگی‌های کلیدی</h6>
                                 <ul class="gt-list">
                                     <li>
-                                        کاور مصنوعی کاملا گیاهی
-                                    </li>
-                                    <li>
-                                        دستگاه های حمایت ثابت با بالشتک نرم
-                                    </li>
-                                    <li>
-                                        مکانیزم صخره‌ای فوق‌العاده تا 15 درجه
+                                        {% for feature in product.key_features.all %}
+                                            {{ feature.title }}
+                                        {% endfor %}
                                     </li>
                                 </ul>
                             </div>
