@@ -11,8 +11,13 @@
     <section class="gt-shop-section section-padding fix">
         <div class="container rtl">
             <div class="row">
-                <!-- محصولات (راست) -->
                 <div class="col-lg-8 col-12">
+                    <div class="alert alert-dark">دسته بندی : ({{ category.title }})</div>
+                    {% if not category.products.count %}
+                        <div class="alert alert-warning text-center my-5 py-4 fs-4 rounded-3 shadow">
+                            هیچ محصولی در این دسته‌بندی وجود ندارد!
+                        </div>
+                    {% endif %}
                     <div class="row g-4">
                         {% for product in products %}
                             <div class="col-xl-3 col-lg-6 col-md-6">
@@ -20,7 +25,7 @@
                                     {#<span>25 درصد تخفیف</span>#}
                                     <div class="gt-shop-image">
                                         {% thumbnail product.image "230x175" as im %}
-                                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                                            <img src="{{ im.url }}">
                                         {% endthumbnail %}
                                         <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
                                             <li><a href="#"><i class="far fa-heart"></i></a></li>
@@ -32,7 +37,9 @@
                                         </ul>
                                     </div>
                                     <div class="gt-shop-content">
-                                        <h4><a href="{% url 'product_detail' product.slug %}">{{ product.title | truncatechars:20 }}</a></h4>
+                                        <h4>
+                                            <a href="{% url 'product_detail' product.slug %}">{{ product.title | truncatechars:20 }}</a>
+                                        </h4>
                                         <p>قیمت: {{ product.price|intcomma }}</p>
                                         <p>ريال</p>
                                     </div>

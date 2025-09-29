@@ -1,9 +1,9 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, DetailView
-
+from django.db.models import Count
 from .forms import ProductCommentForm
-from .models import Product
+from .models import Product, ProductCategory
 
 
 class ProductListView(ListView):
@@ -40,3 +40,27 @@ class ProductDetailView(DetailView):
         context['comment_form'] = product_comment_form
         return redirect(self.request.path_info)
 
+
+def product_sidebar(request):
+    category = ProductCategory.objects.published().annotate(count=Count('products'))
+    latest_products = Product.objects.published().order_by('-created_at')[:3]
+    context = {
+        'category': category,
+        'latest_products': latest_products,
+    }
+    return render(request, 'shop_module/includes/sidebar.html', context)
+
+
+class ProductByCategory(ListView):
+    template_name = 'shop_module/product_by_category.html'
+    paginate_by = 3
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        self.category = get_object_or_404(ProductCategory, slug=self.kwargs['slug'], is_active=True)
+        return self.category.products.published().order_by('-created_at')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.category
+        return context

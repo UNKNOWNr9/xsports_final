@@ -25,12 +25,6 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="gt-shop-details-content">
-                            <ul class="gt-tag-list">
-                                <li>
-                                    <i class="fa-solid fa-tag"></i>
-                                    کتگوری
-                                </li>
-                            </ul>
                             <h4>
                                 {{ product.title }}
                             </h4>
@@ -40,7 +34,7 @@
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star gt-color"></i>
-                                <span>(۱ نظر مشتری)</span>
+                                <span>({{ product.comments.published.count }} نظر مشتری)</span>
                             </div>
                             {% if product.key_features.all %}
                                 <div class="gt-list-item">
@@ -70,7 +64,9 @@
                                 </h6>
                             </div>
                             <h6 class="gt-text">
-                                وضعیت <span>: {% if product.stock != 0 %}<span class="text-success">موجود در انبار</span>{% else %}<span class="text-danger">اتمام موجودی</span>{% endif %}</span>
+                                وضعیت <span>: {% if product.stock != 0 %}
+                                <span class="text-success">موجود در انبار</span>{% else %}
+                                <span class="text-danger">اتمام موجودی</span>{% endif %}</span>
                             </h6>
                             <div class="gt-color-list">
                                 <h6>
@@ -157,8 +153,45 @@
                         {# comments section #}
                         <div id="Reviews" class="tab-pane fade">
                             <div class="th-coustumer-riview">
-                                <h5>نظرات ({{ product.comments.count }})</h5>
+                                {# comments form #}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-success">{{ message }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                                {% for error in comment_form.errors %}
+                                    <div class="alert alert-danger">{{ error }}</div>
+                                {% endfor %}
+
+                                <div class="gt-comment-form-wrap mt-5">
+                                    <h4>یک بررسی اضافه کنید</h4>
+                                    <p>جزئیات خاصی درباره این محصول از مشتریانی که آن را دارند بگیرید.</p>
+                                    {% if request.user.is_authenticated %}
+                                        <form action="#" id="contact-form" method="POST" novalidate> {% csrf_token %}
+                                            <div class="row g-4">
+                                                <div class="col-lg-12">
+                                                    <div class="form-clt">
+                                                        {{ comment_form }}
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <button type="submit" class="gt-theme-btn">
+                                                        <span class="gt-text-btn">ارسال کامنت ها</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    {% else %}
+                                        <div class="alert alert-success">
+                                            برای ارسال کامنت باید <a href="{% url 'login' %}"
+                                                                     class="text-danger">وارد</a>
+                                            حساب خود شوید!
+                                        </div>
+                                    {% endif %}
+                                </div>
                                 {# comments #}
+                                <hr>
+                                <h5>نظرات ({{ product.comments.published.count }})</h5>
                                 {% if product.comments.published %}
                                     {% for comment in product.comments.published %}
                                         <div class="th-review-item gt-style-2">
@@ -169,11 +202,14 @@
                                                             <img src="{{ im.url }}" alt="img">
                                                         {% endthumbnail %}
                                                     {% else %}
-                                                        <img src="{% static 'shared/img/unknown-user.png' %}" alt="img" style="width: 50px" height="50px">
+                                                        <img src="{% static 'shared/img/unknown-user.png' %}" alt="img"
+                                                             style="width: 50px" height="50px">
                                                     {% endif %}
                                                 </div>
                                                 <div class="th-info-text">
-                                                    <h6>توسط<span>: {% if comment.author.get_full_name %}{{ comment.author.get_full_name }}{% else %}{{ comment.author.username }}{% endif %} </span></h6>
+                                                    <h6>توسط<span>: {% if comment.author.get_full_name %}
+                                                        {{ comment.author.get_full_name }}{% else %}
+                                                        {{ comment.author.username }}{% endif %} </span></h6>
                                                     <span>{{ comment.created_at }}</span>
                                                 </div>
                                             </div>
@@ -182,170 +218,9 @@
                                             </p>
                                         </div>
                                     {% endfor %}
+                                {% else %}
+                                    <div class="alert alert-warning">هنوز هیچ کامنتی برای این محصول منتشر نشده.</div>
                                 {% endif %}
-                                {# comments form #}
-                                <div class="gt-comment-form-wrap mt-5">
-                                    <h4>یک بررسی اضافه کنید</h4>
-                                    <p>جزئیات خاصی درباره این محصول از مشتریانی که آن را دارند بگیرید.</p>
-                                    <form action="#" id="contact-form" method="POST" novalidate> {% csrf_token %}
-                                        <div class="row g-4">
-                                            <div class="col-lg-12">
-                                                <div class="form-clt">
-                                                    {{ comment_form }}
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <button type="submit" class="gt-theme-btn">
-                                                    <span class="gt-text-btn">ارسال کامنت ها</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- GT Shop Section Start -->
-    <section class="gt-shop-accesories-section section-padding fix pt-0">
-        <div class="array-buttons">
-            <button class="array-prev"><i class="fa-solid fa-arrow-down"></i></button>
-            <button class="array-next"><i class="fa-solid fa-arrow-up"></i></button>
-        </div>
-        <div class="container rtl">
-            <div class="gt-section-title-2 text-center">
-                <h6 class="wow fadeInUp">تجهیزات بازی</h6>
-                <h2 class="wow fadeInUp" data-wow-delay=".3s">
-                    محصولات مشابه
-                </h2>
-            </div>
-            <div class="swiper gt-shop-slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="gt-shop-card-item gt-style-2">
-                            <span>25 درصد تخفیف</span>
-                            <div class="gt-shop-image">
-                                <img src="{% static 'shared/img/home-1/shop/shop-5.png' %}" alt="img">
-                                <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
-                                    <li>
-                                        <a href="#"><i class="far fa-heart"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="far fa-shopping-cart"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                            <i class="far fa-eye"></i>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="gt-shop-content">
-                                <h5>
-                                    <a href="#">
-                                        صفحه کلید نورانی با ماوس پد
-                                    </a>
-                                </h5>
-                                <p>$185.10 - $285.30</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="gt-shop-card-item gt-style-2">
-                            <span>25 درصد تخفیف</span>
-                            <div class="gt-shop-image">
-                                <img src="{% static 'shared/img/home-1/shop/shop-6.png' %}" alt="img">
-                                <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
-                                    <li>
-                                        <a href="#"><i class="far fa-heart"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="far fa-shopping-cart"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                            <i class="far fa-eye"></i>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="gt-shop-content">
-                                <h5>
-                                    <a href="#">
-                                        عینک‌های واقعیت مجازی و کنترلرها
-                                    </a>
-                                </h5>
-                                <p>280تومان-380تومان</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="gt-shop-card-item gt-style-2">
-                            <span>25 درصد تخفیف</span>
-                            <div class="gt-shop-image">
-                                <img src="{% static 'shared/img/home-1/shop/shop-7.png' %}" alt="img">
-                                <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
-                                    <li>
-                                        <a href="#"><i class="far fa-heart"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="far fa-shopping-cart"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                            <i class="far fa-eye"></i>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="gt-shop-content">
-                                <h5>
-                                    <a href="#">
-                                        عینک‌های واقعیت مجازی و کنترلرها
-                                    </a>
-                                </h5>
-                                <p>280تومان-380تومان</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="gt-shop-card-item gt-style-2">
-                            <span>25 درصد تخفیف</span>
-                            <div class="gt-shop-image">
-                                <img src="{% static 'shared/img/home-1/shop/shop-8.png' %}" alt="img">
-                                <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
-                                    <li>
-                                        <a href="#"><i class="far fa-heart"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="far fa-shopping-cart"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                            <i class="far fa-eye"></i>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="gt-shop-content">
-                                <h5>
-                                    <a href="#">
-                                        عینک‌های واقعیت مجازی و کنترلرها
-                                    </a>
-                                </h5>
-                                <p>280تومان-380تومان</p>
                             </div>
                         </div>
                     </div>
