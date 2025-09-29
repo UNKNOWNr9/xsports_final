@@ -1,6 +1,7 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 {% load thumbnail %}
+{% load custom_filters %}
 {% block title %}فروشگاه | {{ product.title }}{% endblock %}
 {% block banner_title %}بهترین محصولات ما را ببینید !{% endblock %}
 {% block banner_body %}برترین محصولات از همه دسته‌بندی‌ها{% endblock %}
@@ -41,45 +42,43 @@
                                 <i class="fa-solid fa-star gt-color"></i>
                                 <span>(۱ نظر مشتری)</span>
                             </div>
-                            <div class="gt-list-item">
-                                <h6>ویژگی‌های کلیدی</h6>
-                                <ul class="gt-list">
-                                    <li>
-                                        {% for feature in product.key_features.all %}
-                                            {{ feature.title }}
-                                        {% endfor %}
-                                    </li>
-                                </ul>
-                            </div>
+                            {% if product.key_features.all %}
+                                <div class="gt-list-item">
+                                    <h6>ویژگی‌های کلیدی</h6>
+                                    <ul class="gt-list">
+                                        <li>
+                                            {% for feature in product.key_features.all %}
+                                                {% if feature %}
+                                                    {{ feature.title }} <br>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% endif %}
                             <div class="gt-price-item">
                                 <h6>
-                                    قیمت عادی <span>: 120 تومان</span>
+                                    قیمت عادی <span>: {{ product.price | intcomma }} ریال</span>
                                 </h6>
-                                <h6 class="gt-bg">
-                                    قیمت تخفیف خورده <span class="gt-color">: 999 تومان</span>
-                                </h6>
+                                {% if product.discount != 0 %}
+                                    <h6 class="gt-bg">
+                                        قیمت تخفیف خورده <span class="gt-color">???????</span>
+                                    </h6>
+                                {% endif %}
                                 <h6>
-                                    کد محصول : 18396
+                                    کد محصول : {{ product.id }}
                                 </h6>
                             </div>
                             <h6 class="gt-text">
-                                وضعیت <span>: موجود در انبار</span>
+                                وضعیت <span>: {% if product.stock != 0 %}<span class="text-success">موجود در انبار</span>{% else %}<span class="text-danger">اتمام موجودی</span>{% endif %}</span>
                             </h6>
                             <div class="gt-color-list">
                                 <h6>
-                                    انتخاب رنگ :
+                                    رنگ بنده ها:
                                 </h6>
-                                <ul class="gt-list-color-product">
-                                    <li class="list-color-item color-swatch active">
-                                        <span class="swatch-value gt-bg-color"></span>
-                                    </li>
-                                    <li class="list-color-item color-swatch">
-                                        <span class="swatch-value gt-bg-color-2"></span>
-                                    </li>
-                                    <li class="list-color-item color-swatch">
-                                        <span class="swatch-value gt-bg-color-3"></span>
-                                    </li>
-                                </ul>
+                                {% for color in product.color.all %}
+                                    {{ color }} ،
+                                {% endfor %}
                             </div>
                             <div class="gt-button-wrapper">
                                 <div class="cart-quantity">
@@ -129,8 +128,8 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="gt-thumb">
-                                        {% thumbnail product.image '690x500' crop="center" as im %}
+                                    <div class="gt-thumb mt-4">
+                                        {% thumbnail product.image '690x500' as im %}
                                             <img src="{{ im.url }}" alt="img">
                                         {% endthumbnail %}
                                     </div>
@@ -141,122 +140,61 @@
                             <div class="gt-information-list-item">
                                 <h5>اطلاعات اضافی</h5>
                                 <div class="gt-inform-item">
-                                    <div class="gt-inform-text">
-                                        <h6>مواد</h6>
-                                        <span>پی یو، پی وی سی</span>
-                                    </div>
-                                    <div class="gt-inform-text">
-                                        <h6>پشتی‌های قابل تنظیم</h6>
-                                        <span>پشتی دسته دو بعدی، ارتفاع پشتی دسته: 34 سانتی‌متر</span>
-                                    </div>
-                                    <div class="gt-inform-text">
-                                        <h6>زاویه پشتی/ خمیدگی</h6>
-                                        <span>عرض تکیه‌گاه: 57 سانتی‌متر، ارتفاع تکیه‌گاه: 85 سانتی‌متر</span>
-                                    </div>
-                                    <div class="gt-inform-text">
-                                        <h6>منطقه نشیمن</h6>
-                                        <span>ارتفاع قابل تنظیم صندلی: 44 - 54 سانتی‌متر</span>
-                                    </div>
-                                    <div class="gt-inform-text">
-                                        <h6>پشتی سر</h6>
-                                        <span>پشتی‌های قابل جداشدن برای سر و کمر</span>
-                                    </div>
-                                    <div class="gt-inform-text">
-                                        <h6>وزن صندلی</h6>
-                                        <span>14 کیلو گرم</span>
-                                    </div>
-                                    <div class="gt-inform-text">
-                                        <h6>رنگ ها</h6>
-                                        <span>قرمز</span>
-                                    </div>
+                                    {% if product.ProductAdditionalInformations.all %}
+                                        {% for info in product.ProductAdditionalInformations.all %}
+                                            <div class="gt-inform-text">
+                                                <span>{{ info.title }}</span>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="gt-inform-text">
+                                            <span>هیچ اطلاعاتی ثبت نشده است.</span>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
+                        {# comments section #}
                         <div id="Reviews" class="tab-pane fade">
                             <div class="th-coustumer-riview">
-                                <h5>نقد و بررسی (02)</h5>
-                                <p>
-                                    جزئیات خاصی درباره این محصول از مشتریانی که آن را دارند بگیرید.
-                                </p>
-                                <div class="th-review-item">
-                                    <div class="star">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                    <p>
-                                        صندلی گیمینگ قابل تنظیم با طراحی قرمز بسیار راحت و شیک است. پارچه‌اش هم احساس
-                                        خوبی دارد. می‌خواهم از اکسپورت برای فرآیند سریع تحویل تشکر کنم. من فقط در 2 روز
-                                        محصول را دریافت کردم. به طور کلی توصیه می‌شود.
-                                    </p>
-                                    <div class="th-client-info">
-                                        <div class="th-client-image">
-                                            <img src="{% static 'shared/img/inner-page/shop-details/client-1.jpg' %}"
-                                                 alt="img">
+                                <h5>نظرات ({{ product.comments.count }})</h5>
+                                {# comments #}
+                                {% if product.comments.published %}
+                                    {% for comment in product.comments.published %}
+                                        <div class="th-review-item gt-style-2">
+                                            <div class="th-client-info">
+                                                <div class="th-client-image">
+                                                    {% if comment.author.image %}
+                                                        {% thumbnail comment.author.image '50x50' crop="center" as im %}
+                                                            <img src="{{ im.url }}" alt="img">
+                                                        {% endthumbnail %}
+                                                    {% else %}
+                                                        <img src="{% static 'shared/img/unknown-user.png' %}" alt="img" style="width: 50px" height="50px">
+                                                    {% endif %}
+                                                </div>
+                                                <div class="th-info-text">
+                                                    <h6>توسط<span>: {% if comment.author.get_full_name %}{{ comment.author.get_full_name }}{% else %}{{ comment.author.username }}{% endif %} </span></h6>
+                                                    <span>{{ comment.created_at }}</span>
+                                                </div>
+                                            </div>
+                                            <p class="mt-2">
+                                                {{ comment.body | linebreaks }}
+                                            </p>
                                         </div>
-                                        <div class="th-info-text">
-                                            <h6>توسط <span>: کافی دیوید وان</span></h6>
-                                            <span>شش خرداد1404</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="th-review-item gt-style-2">
-                                    <div class="star">
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                        <i class="fa-solid fa-star"></i>
-                                    </div>
-                                    <p>
-                                        صندلی گیمینگ قابل تنظیم با طراحی قرمز بسیار راحت و شیک است. پارچه‌اش هم احساس
-                                        خوبی دارد. می‌خواهم از اکسپورت برای فرآیند سریع تحویل تشکر کنم. من فقط در 2 روز
-                                        محصول را دریافت کردم. به طور کلی توصیه می‌شود.
-                                    </p>
-                                    <div class="th-client-info">
-                                        <div class="th-client-image">
-                                            <img src="{% static 'shared/img/inner-page/shop-details/client-2.jpg' %}"
-                                                 alt="img">
-                                        </div>
-                                        <div class="th-info-text">
-                                            <h6>توسط<span>: مایکل وان</span></h6>
-                                            <span>در شش خرداد 1404</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                    {% endfor %}
+                                {% endif %}
+                                {# comments form #}
                                 <div class="gt-comment-form-wrap mt-5">
                                     <h4>یک بررسی اضافه کنید</h4>
                                     <p>جزئیات خاصی درباره این محصول از مشتریانی که آن را دارند بگیرید.</p>
-                                    <form action="#" id="contact-form" method="POST">
+                                    <form action="#" id="contact-form" method="POST" novalidate> {% csrf_token %}
                                         <div class="row g-4">
-                                            <div class="col-lg-6">
-                                                <div class="form-clt">
-                                                    <span>نام شما</span>
-                                                    <input type="text" name="name" id="name" placeholder="نام شما">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-clt">
-                                                    <span>ایمیل شما</span>
-                                                    <input type="text" name="email" id="email6" placeholder="ایمیل شما">
-                                                </div>
-                                            </div>
                                             <div class="col-lg-12">
                                                 <div class="form-clt">
-                                                    <span>نوشتن پیام</span>
-                                                    <textarea name="message" id="message"
-                                                              placeholder="پیام خود را وارد کنید"></textarea>
+                                                    {{ comment_form }}
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value=""
-                                                           id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        نام، ایمیل و وب‌سایت من را در این مرورگر برای دفعه بعدی که نظر
-                                                        می‌گذارم ذخیره کن.
-                                                    </label>
-                                                </div>
                                                 <button type="submit" class="gt-theme-btn">
                                                     <span class="gt-text-btn">ارسال کامنت ها</span>
                                                 </button>
