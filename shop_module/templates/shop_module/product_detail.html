@@ -28,14 +28,7 @@
                             <h4>
                                 {{ product.title }}
                             </h4>
-                            <div class="star">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star gt-color"></i>
-                                <span>({{ product.comments.published.count }} نظر مشتری)</span>
-                            </div>
+                            <hr>
                             {% if product.key_features.all %}
                                 <div class="gt-list-item">
                                     <h6>ویژگی‌های کلیدی</h6>
@@ -77,19 +70,11 @@
                                 {% endfor %}
                             </div>
                             <div class="gt-button-wrapper">
-                                <div class="cart-quantity">
-                                    <p class="qty">
-                                        <button class="qtyminus" aria-hidden="true">−</button>
-                                        <input type="number" name="qty" id="qty2" min="1" max="10" step="1" value="1">
-                                        <button class="qtyplus" aria-hidden="true">+</button>
-                                    </p>
-                                </div>
-                                <a href="#" class="gt-theme-btn">
-                                    افزودن به سبدخرید
-                                </a>
-                                <a href="#" class="gt-theme-btn gt-style-border style-2">
-                                    الان خرید کن
-                                </a>
+                                <form action="#" method="post"> {% csrf_token %}
+                                    <button type="submit" class="gt-theme-btn">
+                                        افزودن به سبدخرید
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

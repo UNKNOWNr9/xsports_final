@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'contact_module.apps.ContactModuleConfig',
     'admin_module.apps.AdminModuleConfig',
     'shop_module.apps.ShopModuleConfig',
+    'cart_module.apps.CartModuleConfig',
     # external apps
     'django_render_partial',
     'sorl.thumbnail',

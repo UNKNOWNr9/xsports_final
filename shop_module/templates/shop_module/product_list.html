@@ -22,19 +22,14 @@
                                         {% thumbnail product.image "230x175" as im %}
                                             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
                                         {% endthumbnail %}
-                                        <ul class="gt-shop-icon d-grid justify-content-center align-items-center">
-                                            <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-shopping-cart"></i></a></li>
-                                            <li>
-                                                <button data-bs-toggle="modal" data-bs-target="#exampleModal2"><i
-                                                        class="far fa-eye"></i></button>
-                                            </li>
-                                        </ul>
                                     </div>
                                     <div class="gt-shop-content">
                                         <h4><a href="{% url 'product_detail' product.slug %}">{{ product.title | truncatechars:20 }}</a></h4>
                                         <p>قیمت: {{ product.price|intcomma }}</p>
                                         <p>ريال</p>
+                                        <a href="{% url 'product_detail' product.slug %}" class="gt-theme-little-btn mt-3">
+                                            مشاهده محصول
+                                        </a>
                                     </div>
                                 </div>
                             </div>

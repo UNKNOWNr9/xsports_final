@@ -23,7 +23,7 @@
                     <div class="gt-recent-post-area">
                         <div class="gt-recent-items">
                             <div class="gt-recent-thumb">
-                                {% thumbnail latest_product.image '80x80' as im %}
+                                {% thumbnail latest_product.image '80x80' crop="center" as im %}
                                     <img src="{{ im.url }}" alt="img">
                                 {% endthumbnail %}
                             </div>
@@ -35,6 +35,7 @@
                             </div>
                         </div>
                     </div>
+                    <hr>
                 {% endfor %}
             </div>
         {% endif %}
