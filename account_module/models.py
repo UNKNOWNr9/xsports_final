@@ -19,3 +19,4 @@ class CustomUser(AbstractUser):
     )
     is_author = models.BooleanField(default=False, verbose_name='نویسنده')
     image = models.ImageField(upload_to='user_avatar', blank=True, null=True, verbose_name='آواتار')
+    address = models.CharField(max_length=300, null=True, blank=True, verbose_name='آدرس محل سکونت')

@@ -1,8 +1,15 @@
-# cart_module/views.py
 from django.shortcuts import redirect, get_object_or_404, render
-from django.views import View
+from django.views.generic import View, TemplateView
 from shop_module.models import Product
-from .models import Cart, CartItem
+from .models import Cart, CartItem, Order
+from .forms import CheckoutForm
+from django.contrib import messages
+
+
+class CartView(View):
+    def get(self, request):
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        return render(request, "cart_module/cart_detail.html", {"cart": cart})
 
 
 class AddToCartView(View):
@@ -37,8 +44,35 @@ class UpdateQuantityView(View):
         return redirect("cart")
 
 
-
-class CartView(View):
+class CheckoutView(View):
     def get(self, request):
-        cart, created = Cart.objects.get_or_create(user=request.user)
-        return render(request, "cart_module/cart_detail.html", {"cart": cart})
+        checkout_form = CheckoutForm()
+        context = {
+            'checkout_form': checkout_form
+        }
+        return render(request, 'cart_module/checkout.html', context)
+
+    def post(self, request):
+        checkout_form = CheckoutForm(request.POST)
+        cart = get_object_or_404(Cart, user=request.user)
+        if checkout_form.is_valid():
+            order = Order.objects.create(
+                user=request.user,
+                first_name=checkout_form.cleaned_data['first_name'],
+                last_name=checkout_form.cleaned_data['last_name'],
+                phone=checkout_form.cleaned_data['phone'],
+                address=checkout_form.cleaned_data['address'],
+                total_amount=cart.total_price_with_tax(),
+            )
+            order.status = 'paid'
+            order.save()
+            cart.items.all().delete()
+            messages.success(
+                request,
+                '✅ به دلیل تستی بودن سایت، پرداخت واقعی انجام نشد اما سفارش شما با موفقیت ثبت و پرداخت شده در نظر گرفته شد.'
+            )
+            return redirect('cart')
+        context = {
+            'checkout_form': checkout_form
+        }
+        return render(request, 'cart_module/checkout.html', context)

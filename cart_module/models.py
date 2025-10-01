@@ -47,3 +47,27 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.product.title} x {self.quantity}"
+
+
+class Order(models.Model):
+    STATUS_CHOICES = (
+        ('pending', 'در انتظار پرداخت'),
+        ('paid', 'پرداخت شده'),
+        ('failed', 'ناموفق'),
+    )
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="کاربر")
+    first_name = models.CharField(max_length=50, verbose_name='نام')
+    last_name = models.CharField(max_length=50, verbose_name='نام خانوادگی')
+    phone = models.CharField(max_length=11, verbose_name='شماره تلفن')
+    address = models.TextField(verbose_name='آدرس')
+    total_amount = models.PositiveIntegerField(verbose_name='قیمت کل')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name='وضعیت')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ثبت')
+
+    class Meta:
+        verbose_name = 'سفارش'
+        verbose_name_plural = 'سفارشات'
+
+    def __str__(self):
+        return f"سفارش {self.id} - {self.user}"

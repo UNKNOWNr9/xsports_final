@@ -1,6 +1,7 @@
 from django import forms
 from django.core.validators import ValidationError
 
+
 class EditProfileForm(forms.Form):
     first_name = forms.CharField(
         label='نام',
