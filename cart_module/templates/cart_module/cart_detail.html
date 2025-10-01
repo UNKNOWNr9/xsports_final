@@ -1,0 +1,99 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% load thumbnail %}
+{% block title %}سبد خرید{% endblock %}
+{% block banner_title %}{% endblock %}
+{% block banner_body %}{% endblock %}
+{% block content %}
+
+    <!-- GT Shop Cart Section Start -->
+    <div class="cart-section fix section-padding pb-0 rtl">
+        <div class="container">
+            <div class="cart-list-area">
+                <div class="table-responsive">
+                    <table class="table common-table">
+                        <thead data-aos="fade-down">
+                        <tr>
+                            <th class="text-center">محصول</th>
+                            <th class="text-center">تعداد</th>
+                            <th class="text-center">قیمت واحد</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if products %}
+                            {% for item in products %}
+                                <tr class="align-items-center py-3">
+                                    <td>
+                                        <div class="cart-item-thumb d-flex align-items-center gap-4">
+                                            <!-- دکمه حذف -->
+                                            <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" style="background:none;border:none;">
+                                                    <i class="fas fa-times text-danger"></i>
+                                                </button>
+                                            </form>
+                                            <!-- تصویر محصول -->
+                                            {% if item.product.image %}
+                                                {% thumbnail item.product.image '140x140' as im %}
+                                                    <img src="{{ im.url }}">
+                                                {% endthumbnail %}
+                                            {% else %}
+                                                <img src="{% static 'shared/img/inner-page/shop-details/product-1.jpg' %}"
+                                                     alt="{{ item.product.title |truncatechars:30 }}">
+                                            {% endif %}
+
+                                            <span class="head text-nowrap">{{ item.product.title | truncatechars:20 }}</span>
+                                        </div>
+                                    </td>
+
+                                    <!-- تعداد -->
+                                    <td class="text-center">
+                                        <span class="price-usd">
+                                            {{ item.quantity }} عدد
+                                        </span>
+                                    </td>
+                                    <!-- قیمت واحد -->
+                                    <td class="text-center">
+                                        <span class="price-usd">
+                                            {{ item.product.price|intcomma }} ریال
+                                        </span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center">
+                                    <div class="alert alert-warning">سبد خرید شما خالی است.</div>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Total section -->
+    {% if products %}
+        <div class="cart-total-area pt-5 section-padding rtl">
+            <div class="container">
+                <div class="cart-total-items">
+                    <h3>جمع کلی</h3>
+                    <ul>
+                        <li>
+                            جمع جزئی <span class="subtotal">{{ total_price|intcomma }} تومان</span>
+                        </li>
+                        <li>
+                            مجموع <span class="price">{{ total_price|intcomma }} تومان</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="gt-theme-btn">
+                        به صفحه پرداخت بروید
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
