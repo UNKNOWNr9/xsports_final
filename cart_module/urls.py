@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import CartView, AddToCart, RemoveFromCart, UpdateCart
+from .views import AddToCartView, CartView, DeleteFromCartView, UpdateQuantityView
 
 urlpatterns = [
     path('', CartView.as_view(), name='cart'),
-    path('add/<int:pk>/', AddToCart.as_view(), name='add_to_cart'),
-    path('remove/<int:pk>/', RemoveFromCart.as_view(), name='remove_from_cart'),
-    path('update/<int:pk>/', UpdateCart.as_view(), name='update_cart'),
+    path('add-to-cart/<int:pk>/', AddToCartView.as_view(), name='add_to_cart'),
+    path('delete-form-cart/<int:pk>/', DeleteFromCartView.as_view(), name='delete_from_cart'),
+    path('update-quantity/<int:pk>/', UpdateQuantityView.as_view(), name='update_quantity'),
 ]

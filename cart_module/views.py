@@ -1,59 +1,44 @@
-from django.views.generic import View
-from django.shortcuts import render, redirect, get_object_or_404
+# cart_module/views.py
+from django.shortcuts import redirect, get_object_or_404, render
+from django.views import View
 from shop_module.models import Product
+from .models import Cart, CartItem
+
+
+class AddToCartView(View):
+    def post(self, request, pk):
+        product = get_object_or_404(Product, pk=pk)
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        if not created:
+            item.quantity += 1
+            item.save()
+        return redirect("cart")
+
+
+class DeleteFromCartView(View):
+    def post(self, request, pk):
+        cart = get_object_or_404(Cart, user=request.user)
+        item = get_object_or_404(CartItem, cart=cart, pk=pk)
+        item.delete()
+        return redirect('cart')
+
+
+class UpdateQuantityView(View):
+    def post(self, request, pk):
+        cart = get_object_or_404(Cart, user=request.user)
+        item = get_object_or_404(CartItem, cart=cart, pk=pk)
+        quantity = int(request.POST.get("quantity", 1))
+        if quantity > 0:
+            item.quantity = quantity
+            item.save()
+        else:
+            item.delete()
+        return redirect("cart")
+
 
 
 class CartView(View):
     def get(self, request):
-        cart = request.session.get("cart", {})
-        products = []
-        total_price = 0
-
-        for product_id, item in cart.items():
-            product = get_object_or_404(Product, id=product_id)
-            quantity = item["quantity"]
-            price = product.price * quantity
-            products.append({
-                "product": product,
-                "quantity": quantity,
-                "total": price
-            })
-            total_price += price
-
-        return render(request, 'cart_module/cart_detail.html', {
-            "products": products,
-            "total_price": total_price
-        })
-
-
-class AddToCart(View):
-    def post(self, request, pk):
-        product = get_object_or_404(Product, id=pk)
-        cart = request.session.get("cart", {})
-
-        if str(pk) in cart:
-            cart[str(pk)]["quantity"] += 1
-        else:
-            cart[str(pk)] = {"quantity": 1}
-
-        request.session["cart"] = cart
-        return redirect('cart')
-
-
-class RemoveFromCart(View):
-    def post(self, request, pk):
-        cart = request.session.get("cart", {})
-        if str(pk) in cart:
-            del cart[str(pk)]
-            request.session["cart"] = cart
-        return redirect("cart")
-
-
-class UpdateCart(View):
-    def post(self, request, pk):
-        quantity = int(request.POST.get("quantity", 1))
-        cart = request.session.get("cart", {})
-        if str(pk) in cart:
-            cart[str(pk)]["quantity"] = quantity
-            request.session["cart"] = cart
-        return redirect("cart")
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        return render(request, "cart_module/cart_detail.html", {"cart": cart})
