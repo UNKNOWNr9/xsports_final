@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.db.models import Count
 from .forms import ProductCommentForm
 from .models import Product, ProductCategory
+from django.db.models import Q
 
 
 class ProductListView(ListView):
@@ -63,4 +64,26 @@ class ProductByCategory(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category'] = self.category
+        return context
+
+
+class ProductSearchView(ListView):
+    template_name = 'shop_module/product_list.html'
+    context_object_name = 'products'
+    paginate_by = 3
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        qs = Product.objects.published()
+        if query:
+            qs = qs.filter(
+                Q(title__icontains=query) |
+                Q(body__icontains=query) |
+                Q(slug__icontains=query)
+            )
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q', '')
         return context

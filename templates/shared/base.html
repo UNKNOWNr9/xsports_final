@@ -176,9 +176,9 @@
                 </div>
                 <div class="header-right d-flex justify-content-end align-items-center">
                     <div class="header-right-icon">
-                        <a href="#" class="main-header__search search-toggler">
-                            <i class="fa-regular fa-magnifying-glass"></i>
-                        </a>
+                        {% block search_icon %}
+
+                        {% endblock %}
                         <a href="{% url 'cart' %}">
                             <i class="far fa-shopping-cart"></i>
                         </a>
@@ -203,19 +203,9 @@
     </div>
 </header>
 
-<!-- GT Search Start -->
-<div class="search-popup">
-    <div class="search-popup__overlay search-toggler"></div>
-    <div class="search-popup__content rtl">
-        <form role="search" method="get" class="search-popup__form" action="{% url 'searchbar' %}">
-            <input type="text" id="search" name="q" placeholder="اینجا جستجو کنید...">
-            <button type="submit" aria-label="search submit" class="search-btn">
-                <span><i class="fa-regular fa-magnifying-glass"></i></span>
-            </button>
-        </form>
-    </div>
-</div>
-
+{% block searchbar %}
+	
+{% endblock %}
 <!-- GT Banner Start -->
 <section class="hero-section hero-1 fix bg-cover rtl"
          style="background-image: url({% static 'shared/img/home-1/hero/hero-bg.jpg' %});">

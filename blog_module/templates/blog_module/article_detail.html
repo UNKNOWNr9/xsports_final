@@ -3,6 +3,25 @@
 {% load thumbnail %}
 {% load render_partial %}
 {% block title %} {{ article.title }} {% endblock %}
+{% block search_icon %}
+    <a href="#" class="main-header__search search-toggler">
+        <i class="fa-regular fa-magnifying-glass"></i>
+    </a>
+{% endblock %}
+{% block searchbar %}
+    <!-- GT Search Start -->
+    <div class="search-popup">
+        <div class="search-popup__overlay search-toggler"></div>
+        <div class="search-popup__content rtl">
+            <form role="search" method="get" class="search-popup__form" action="{% url 'article_searchbar' %}">
+                <input type="text" id="search" name="q" placeholder="اینجا جستجو کنید...">
+                <button type="submit" aria-label="search submit" class="search-btn">
+                    <span><i class="fa-regular fa-magnifying-glass"></i></span>
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
 {% block content %}
     <!-- GT News-details Section Start -->
     <section class="news-details-section section-padding">
@@ -32,7 +51,7 @@
                                 </li>
                                 <li class="mx-3">
                                     <i class="fa-solid fa-comments"></i>
-                                     {{ article.comments.published.count }}  نظر 
+                                    {{ article.comments.published.count }} نظر
                                 </li>
                             </ul>
                             <h3>{{ article.title }}</h3>
@@ -50,14 +69,14 @@
                                         </div>
                                     </div>
                                 {% endif %}
-{#                                <div class="col-lg-4 col-12 mt-3 mt-lg-0 text-lg-end">#}
-{#                                    <div class="social-share">#}
-{#                                        <a href="#"><i class="fab fa-twitter"></i></a>#}
-{#                                        <a href="#"><i class="fa-brands fa-youtube"></i></a>#}
-{#                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>#}
-{#                                        <a href="#"><i class="fab fa-facebook-f"></i></a>#}
-{#                                    </div>#}
-{#                                </div>#}
+                                {#                                <div class="col-lg-4 col-12 mt-3 mt-lg-0 text-lg-end">#}
+                                {#                                    <div class="social-share">#}
+                                {#                                        <a href="#"><i class="fab fa-twitter"></i></a>#}
+                                {#                                        <a href="#"><i class="fa-brands fa-youtube"></i></a>#}
+                                {#                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>#}
+                                {#                                        <a href="#"><i class="fab fa-facebook-f"></i></a>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
                             </div>
                             <div class="gt-comment-form-wrap mt-5">
                                 {% if messages %}
@@ -136,6 +155,4 @@
             </div>
         </div>
     </section>
-    <!-- GT Newsletter Section Start -->
-    {% include 'shared/includes/advertising_banner.html' %}
 {% endblock %}

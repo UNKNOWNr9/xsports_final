@@ -1,18 +1,19 @@
 from django.shortcuts import redirect, get_object_or_404, render
-from django.views.generic import View, TemplateView
+from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from shop_module.models import Product
 from .models import Cart, CartItem, Order
 from .forms import CheckoutForm
 from django.contrib import messages
 
 
-class CartView(View):
+class CartView(LoginRequiredMixin, View):
     def get(self, request):
         cart, created = Cart.objects.get_or_create(user=request.user)
         return render(request, "cart_module/cart_detail.html", {"cart": cart})
 
 
-class AddToCartView(View):
+class AddToCartView(LoginRequiredMixin, View):
     def post(self, request, pk):
         product = get_object_or_404(Product, pk=pk)
         cart, created = Cart.objects.get_or_create(user=request.user)
@@ -23,7 +24,7 @@ class AddToCartView(View):
         return redirect("cart")
 
 
-class DeleteFromCartView(View):
+class DeleteFromCartView(LoginRequiredMixin, View):
     def post(self, request, pk):
         cart = get_object_or_404(Cart, user=request.user)
         item = get_object_or_404(CartItem, cart=cart, pk=pk)
@@ -31,7 +32,7 @@ class DeleteFromCartView(View):
         return redirect('cart')
 
 
-class UpdateQuantityView(View):
+class UpdateQuantityView(LoginRequiredMixin, View):
     def post(self, request, pk):
         cart = get_object_or_404(Cart, user=request.user)
         item = get_object_or_404(CartItem, cart=cart, pk=pk)
@@ -44,7 +45,7 @@ class UpdateQuantityView(View):
         return redirect("cart")
 
 
-class CheckoutView(View):
+class CheckoutView(LoginRequiredMixin, View):
     def get(self, request):
         checkout_form = CheckoutForm()
         context = {

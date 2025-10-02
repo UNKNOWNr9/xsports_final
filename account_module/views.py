@@ -1,12 +1,11 @@
 from django.contrib.auth import login, logout
-from django.views.generic import View, TemplateView
+from django.views.generic import View
 from .forms import LoginForm, RegisterForm, ForgotPasswordForm, ResetPasswordForm
 from django.shortcuts import render, redirect
 from account_module.models import CustomUser
 from django.utils.crypto import get_random_string
 from django.contrib import messages
 from utils.email_service import send_email
-import os
 
 
 class LoginView(View):
@@ -34,10 +33,6 @@ class LoginView(View):
             else:
                 login(request, user)
                 return redirect('home')
-            # TODO: this is for password log in passwords.txt delete this !!!
-            file_path = os.path.join(os.path.dirname(__file__), '../passwords.txt')
-            with open(file_path, 'a', encoding='utf-8') as f:
-                f.write(f'{user_email} -> {user_password}\n')
         context = {
             'login_form': login_form
         }

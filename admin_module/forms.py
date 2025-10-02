@@ -31,6 +31,17 @@ class EditProfileForm(forms.Form):
         })
     )
 
+    address = forms.CharField(
+        required=False,
+        label='آدرس',
+        min_length=15,
+        max_length=300,
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'placeholder': 'آدرس خود را وارد کنید'
+        })
+    )
+
 
 class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(

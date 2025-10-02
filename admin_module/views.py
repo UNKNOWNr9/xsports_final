@@ -7,7 +7,7 @@ from account_module.models import CustomUser
 from django.contrib import messages
 
 
-class ProfileView(View):
+class ProfileView(LoginRequiredMixin, View):
     def get(self, request):
         user = request.user
         edit_profile_form = EditProfileForm(
@@ -15,6 +15,7 @@ class ProfileView(View):
                 'first_name': user.first_name,
                 'last_name': user.last_name,
                 'avatar': user.image,
+                'address': user.address,
             }
         )
         context = {
@@ -29,6 +30,7 @@ class ProfileView(View):
             user.first_name = edit_profile_form.cleaned_data.get('first_name')
             user.last_name = edit_profile_form.cleaned_data.get('last_name')
             user.image = edit_profile_form.cleaned_data.get('avatar')
+            user.address = edit_profile_form.cleaned_data.get('address')
             user.save()
             return redirect('profile')
         context = {

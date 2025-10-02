@@ -47,7 +47,7 @@ class CheckoutForm(forms.Form):
 
     address = forms.CharField(
         label='آدرس',
-        min_length=30,
+        min_length=15,
         max_length=300,
         widget=forms.Textarea(attrs={
             'class': 'input100',

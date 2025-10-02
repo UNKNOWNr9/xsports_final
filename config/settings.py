@@ -79,6 +79,8 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'account_module.CustomUser'
+LOGIN_URL = '/account/login/'
+SESSION_COOKIE_AGE = 86400
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
