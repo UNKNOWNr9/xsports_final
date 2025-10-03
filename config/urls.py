@@ -12,4 +12,5 @@ urlpatterns = [
     path('dashboard/', include('admin_module.urls')),
     path('shop/', include('shop_module.urls')),
     path('cart/', include('cart_module.urls')),
+    path('drf/', include('z_drf_module.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
