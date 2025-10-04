@@ -1,7 +1,8 @@
+from .views import *
 from django.urls import path
-from .views import ApiView
 
 
 urlpatterns = [
-    path('', ApiView.as_view())
+    path('', ProductApiView.as_view()),
+    path('<int:pk>/', ProductDetailApiView.as_view()),
 ]
