@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'admin_module.apps.AdminModuleConfig',
     'shop_module.apps.ShopModuleConfig',
     'cart_module.apps.CartModuleConfig',
-    'z_drf_module.apps.ZDrfModuleConfig',
+    'api_module.apps.ApiModuleConfig',
     # external apps
     'rest_framework',
     'django_render_partial',

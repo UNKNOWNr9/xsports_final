@@ -10,7 +10,7 @@ from django.db.models import Q
 class ProductListView(ListView):
     queryset = Product.objects.published()
     template_name = 'shop_module/product_list.html'
-    paginate_by = 1
+    paginate_by = 12
     context_object_name = 'products'
 
 
