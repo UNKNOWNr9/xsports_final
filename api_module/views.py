@@ -27,3 +27,20 @@ class ProductAddApiView(APIView):
             serializer.save()
             return Response({'Response': 'Product Added'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors)
+
+
+class ProductEditApiView(APIView):
+    def post(self, request, pk):
+        instance = Products.objects.get(pk=pk)
+        serializer = ProductSerializer(instance=instance, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'response': 'success'})
+        return Response(serializer.errors)
+
+
+class ProductDeleteApiView(APIView):
+    def post(self, request, pk):
+        instance = Products.objects.get(pk=pk)
+        instance.delete()
+        return Response({'Response': 'deleted'})
