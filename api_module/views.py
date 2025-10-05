@@ -1,25 +1,29 @@
-from rest_framework.views import APIView
-from .serializers import ProductSerializer
+from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .models import Products
+from .serializers import ProductSerializer
 
 
-class ProductApiView(APIView):
+class ProductListApiView(APIView):
     def get(self, request):
-        query = Products.objects.all()
-        serializer = ProductSerializer(instance=query, many=True)
+        instance = Products.objects.all()
+        serializer = ProductSerializer(instance=instance, many=True)
         return Response(serializer.data)
-
-    def post(self, request):
-        serializer = ProductSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'response': 'added'})
-        return Response(serializer.errors)
 
 
 class ProductDetailApiView(APIView):
     def get(self, request, pk):
-        query = Products.objects.get(pk=pk)
-        serializer = ProductSerializer(instance=query)
-        return Response(serializer.data)
+        instance = Products.objects.get(pk=pk)
+        serializer = ProductSerializer(instance=instance)
+        return Response(data=serializer.data)
+
+
+class ProductAddApiView(APIView):
+    def post(self, request):
+        serializer = ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'Response': 'Product Added'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors)

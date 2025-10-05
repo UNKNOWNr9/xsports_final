@@ -3,12 +3,10 @@ from .models import Products
 
 
 class ProductSerializer(serializers.Serializer):
+    id = serializers.IntegerField(label='آیدی', required=False)
     title = serializers.CharField(max_length=100, label='عنوان')
-    content = serializers.CharField(label='توضیحات')
-    is_active = serializers.BooleanField(label='فعال / غیرفعال')
+    content = serializers.CharField(max_length=3000, label='توضیحات')
+    is_active = serializers.BooleanField(default=False, label='فعال / غیرفعال', required=False)
 
     def create(self, validated_data):
         return Products.objects.create(**validated_data)
-
-    def __str__(self):
-        return self.title
