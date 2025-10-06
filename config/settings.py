@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_render_partial',
     'sorl.thumbnail',
+    # drf
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
