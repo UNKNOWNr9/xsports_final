@@ -1,12 +1,9 @@
 from django.urls import path
-
 from .views import *
 
 urlpatterns = [
-    path('', ProductListApiView.as_view()),
-    path('check-token/', CheckToken.as_view()),
-    path('<int:pk>/', ProductDetailApiView.as_view()),
-    path('add/', ProductAddApiView.as_view()),
-    path('edit/<str:pk>/', ProductEditApiView.as_view()),
-    path('delete/<str:pk>/', ProductDeleteApiView.as_view()),
-]
+    path('', ArticleListApiView.as_view()),
+    path('<int:pk>/', ArticleDetailApiView.as_view()),
+    path('create/', ArticleCreateApiView.as_view()),
+    path('delete/<int:pk>/', ArticleDeleteApiView.as_view()),
+    ]
