@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from blog_module.models import Article, ArticleComment
+from blog_module.models import Article
 
 
 class ArticleSerializer(serializers.ModelSerializer):
