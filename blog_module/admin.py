@@ -13,7 +13,7 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'image_tag', 'author', 'created_at', 'updated_at', 'slug', 'status']
+    list_display = ['id', 'title', 'image_tag', 'author', 'created_at', 'updated_at', 'slug', 'status']
     list_filter = ['created_at', 'updated_at', 'status']
     search_fields = ['title', 'body', 'author__username', 'author__first_name', 'author__last_name']
 

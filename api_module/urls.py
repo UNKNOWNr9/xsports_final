@@ -1,9 +1,7 @@
-from django.urls import path
-from .views import ArticleListApiView, ArticleDetailApiView
+from rest_framework.routers import DefaultRouter
+from .views import ArticleApiView, ProductApiView
 
-urlpatterns = [
-    path('', ArticleListApiView.as_view()),
-    path('<int:pk>/', ArticleDetailApiView.as_view()),
-    path('create/<int:pk>/', ArticleDetailApiView.as_view()),
-    path('delete/<int:pk>/', ArticleDetailApiView.as_view()),
-    ]
+router = DefaultRouter()
+router.register(r'article', ArticleApiView, basename='article_api')
+router.register(r'product', ProductApiView, basename='product_api')
+urlpatterns = router.urls
